@@ -92,7 +92,7 @@ body {
   display: flex;
   list-style: none;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   position: relative;
 }
 .header-nav ul li {
@@ -116,12 +116,14 @@ body {
   animation: header-nav 0.5s ease forwards;
 }
 .paragrafos {
+  margin-top: 60px;
   text-align: justify;
   text-indent: 30px;
 }
 .hero-section {
   height: calc(100vh-160px);
   width: 100%;
+  top: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -134,12 +136,14 @@ body {
   width: 60%;
 }
 .hero-content h1 {
-  font-size: 45px;
+  margin-top: 30px;
+  font-size: 32px;
 }
 .hero-content p {
   font-size: var(--fs-hero-content-body);
 }
 .content-btn {
+  margin-top: 80px;
   padding-top: 20px;
   justify-content: space-between;
   display: flex;
