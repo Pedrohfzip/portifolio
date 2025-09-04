@@ -3,8 +3,7 @@
   background: radial-gradient(circle at left, #090A09 50%, #0D0C0D, #0D0C0D, #0D0C0D 80%, #0D0C0D 10%) !important;
 }
 .bg-section {
-  background: radial-gradient(circle at left, #0a0a0a 0%, #1e3a8a 100%) !important;
-  scrollbar-color: #1e3a8a #1e3a8a !important;
+  background: radial-gradient(circle at left, #090A09 50%, #0D0C0D, #0D0C0D, #0D0C0D 80%, #0D0C0D 10%) !important;
 }
 /* Esconde completamente a barra de rolagem (scrollbar) */
 
