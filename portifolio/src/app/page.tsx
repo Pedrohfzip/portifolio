@@ -1,5 +1,8 @@
 "use client";
 import ParticlesBackground from "./ParticlesBackground";
+import dynamic from "next/dynamic";
+// Componente alternativo para a próxima sessão
+const ParticlesBackgroundAlt = dynamic(() => import("./ParticlesBackgroundAlt"), { ssr: false, loading: () => null });
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
@@ -28,26 +31,35 @@ export default function Home() {
   const headerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [bgClass, setBgClass] = useState("bg-header");
-  const text = "Focado em criar soluções eficientes, escaláveis e de alto impacto. Tenho experiência em projetos completos, prezando por qualidade, boas práticas e evolução contínua, sempre buscando aprender e me adaptar às novas tecnologias e inovando na experiência do usuário.";
+  const [showAltParticles, setShowAltParticles] = useState(false);
+  const text = "Desenvolvo soluções eficientes, escaláveis e inovadoras, com foco em qualidade e experiência do usuário. Sempre em evolução, aprendendo e me adaptando às novas tecnologias.";
   const typedText = useTypewriter(text, 30); // 30ms por caractere
 
   useEffect(() => {
-    const handleScroll = () => {
-      const header = headerRef.current;
-      const section = sectionRef.current;
-      if (!header || !section) return;
-      const headerRect = header.getBoundingClientRect();
-      const sectionRect = section.getBoundingClientRect();
-      // Se a maior parte do header está visível
-      if (headerRect.top > -headerRect.height / 2) {
-        setBgClass("bg-header");
-      } else {
-        setBgClass("bg-section");
+    const header = headerRef.current;
+    const section = sectionRef.current;
+    if (!header || !section) return;
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.target === header && entry.isIntersecting) {
+            setBgClass("bg-header");
+            setShowAltParticles(false);
+          }
+          if (entry.target === section && entry.isIntersecting) {
+            setBgClass("bg-section");
+            setShowAltParticles(true);
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.5,
       }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    );
+    observer.observe(header);
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   const [isDesktop, setIsDesktop] = useState(true);
@@ -63,14 +75,14 @@ export default function Home() {
 
   return (
     <div
-      className={`m-0 p-0 h-screen w-screen scroll-smooth ${isDesktop ? 'overflow-y-auto overflow-x-hidden' : ''} scroll-smooth snap-y snap-mandatory`}
+      className={`m-0 p-0 h-screen w-screen scroll-smooth ${bgClass} ${isDesktop ? 'overflow-y-auto overflow-x-hidden scroll-smooth snap-y snap-mandatory' : ''} `}
     >
       <header
         ref={headerRef}
         className="w-screen h-screen flex flex-col align-center snap-start"
         id="header"
       >
-        <ParticlesBackground />
+        {!showAltParticles && <ParticlesBackground />}
         <div className="w-screen h-screen flex flex-col items-center justify-around relative z-9 pt-10">
           <div className="flex flex-col items-center space-y-4 text-white-700 z-11">
             <motion.div
@@ -170,9 +182,10 @@ export default function Home() {
       <section
         ref={sectionRef}
         id="next-section"
-        className="w-screen h-screen flex items-center justify-center text-white snap-start"
+        className="w-screen h-screen flex items-center justify-center text-white snap-start relative"
       >
-        <h2 className="text-4xl font-bold">Próxima Sessão</h2>
+        {showAltParticles && <ParticlesBackgroundAlt />}
+        <h2 className="text-4xl font-bold relative z-10">Próxima Sessão</h2>
       </section>
     </div>
   );
