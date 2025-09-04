@@ -3,7 +3,8 @@ import ParticlesBackground from "./ParticlesBackground";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { SiJavascript, SiReact, SiNodedotjs } from "react-icons/si";
+import { SiJavascript, SiReact, SiNodedotjs, } from "react-icons/si";
+import { IoIosArrowDown } from "react-icons/io";
 
 // Hook para efeito de digitação
 function useTypewriter(text: string, speed = 40) {
@@ -28,7 +29,7 @@ export default function Home() {
   const typedText = useTypewriter(text, 30); // 30ms por caractere
 
   return (
-    <div className="m-0 p-0 h-screen w-screen overflow-y-scroll scroll-smooth snap-y snap-mandatory ">
+  <div className="m-0 p-0 h-screen w-screen overflow-y-scroll overflow-x-hidden  scroll-smooth snap-y snap-mandatory ">
       <header
         className="w-screen h-screen flex flex-col align-center snap-start"
         style={{
@@ -121,16 +122,15 @@ export default function Home() {
               </motion.span>
             </motion.div>
           </div>
+        </div>
+        <div className="flex justify-center pb-6">
           <a
             href="#next-section"
             aria-label="Ir para a próxima sessão"
-            className="animate-bounce"
+            className="flex arrow-group  arrow-icon z-11"
           >
-            <span className="block w-8 h-8 flex items-center justify-center">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16 6V24" stroke="#ffffffff" strokeWidth="4" strokeLinecap="round"/>
-                <path d="M8 18L16 26L24 18" stroke="#ffffffff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              <span className="arrow-circle">
+              <IoIosArrowDown className="arrow-icon"/>
             </span>
           </a>
         </div>

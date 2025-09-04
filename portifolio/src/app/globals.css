@@ -1,3 +1,54 @@
+/* Esconde completamente a barra de rolagem (scrollbar) */
+
+/* Esconde completamente a barra de rolagem (scrollbar) */
+::-webkit-scrollbar {
+  background-color:  #0D0C0D !important;
+}
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-button {
+  display: none !important;
+  background-color: #0D0C0D !important;
+  border: none !important;
+}
+
+html {
+  scrollbar-width: none !important;
+  scrollbar-color: #0D0C0D #0D0C0D !important;
+}
+
+/* Flecha animada do scroll */
+.arrow-bounce {
+  animation: arrowBounce 1.2s infinite;
+}
+
+@keyframes arrowBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(12px); }
+}
+
+.arrow-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  background: transparent;
+  transition: all 0.3s;
+}
+.arrow-group:hover .arrow-circle {
+  background: #fff;
+  transform: scale(1.15);
+}
+.arrow-icon {
+  color: #fff;
+  font-size: 2.5rem;
+  transition: color 0.3s;
+}
+.arrow-group:hover .arrow-icon {
+  color: #111;
+}
 @import "tailwindcss";
 
 :root {
