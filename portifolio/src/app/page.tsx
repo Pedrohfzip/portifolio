@@ -2,7 +2,7 @@
 import ParticlesBackground from "./ParticlesBackground";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { SiJavascript, SiReact, SiNodedotjs, } from "react-icons/si";
 import { IoIosArrowDown } from "react-icons/io";
 
@@ -25,17 +25,49 @@ function useTypewriter(text: string, speed = 40) {
 }
 
 export default function Home() {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [bgClass, setBgClass] = useState("bg-header");
   const text = "Focado em criar soluções eficientes, escaláveis e de alto impacto. Tenho experiência em projetos completos, prezando por qualidade, boas práticas e evolução contínua, sempre buscando aprender e me adaptar às novas tecnologias e inovando na experiência do usuário.";
   const typedText = useTypewriter(text, 30); // 30ms por caractere
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const header = headerRef.current;
+      const section = sectionRef.current;
+      if (!header || !section) return;
+      const headerRect = header.getBoundingClientRect();
+      const sectionRect = section.getBoundingClientRect();
+      // Se a maior parte do header está visível
+      if (headerRect.top > -headerRect.height / 2) {
+        setBgClass("bg-header");
+      } else {
+        setBgClass("bg-section");
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+    checkScreen();
+    window.addEventListener('resize', checkScreen);
+    return () => window.removeEventListener('resize', checkScreen);
+  }, []);
+
   return (
-  <div className="m-0 p-0 h-screen w-screen overflow-y-scroll overflow-x-hidden  scroll-smooth snap-y snap-mandatory ">
+    <div
+      className={`m-0 p-0 h-screen w-screen scroll-smooth ${isDesktop ? 'overflow-y-auto overflow-x-hidden' : ''} scroll-smooth snap-y snap-mandatory`}
+    >
       <header
+        ref={headerRef}
         className="w-screen h-screen flex flex-col align-center snap-start"
-        style={{
-          background:
-            "radial-gradient(circle at left, #090A09 50%, #0D0C0D, #0D0C0D, #0D0C0D 80%, #0D0C0D 10%)",
-        }}
         id="header"
       >
         <ParticlesBackground />
@@ -136,12 +168,9 @@ export default function Home() {
         </div>
       </header>
       <section
+        ref={sectionRef}
         id="next-section"
-        className="w-screen h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-blue-900 text-white snap-start"
-        style={{
-          background:
-            "radial-gradient(circle at left, #090A09 50%, #0D0C0D, #0D0C0D, #0D0C0D 80%, #0D0C0D 10%)",
-        }}
+        className="w-screen h-screen flex items-center justify-center text-white snap-start"
       >
         <h2 className="text-4xl font-bold">Próxima Sessão</h2>
       </section>

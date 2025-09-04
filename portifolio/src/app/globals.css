@@ -1,16 +1,12 @@
+/* Backgrounds para troca dinâmica */
+.bg-header {
+  background: radial-gradient(circle at left, #090A09 50%, #0D0C0D, #0D0C0D, #0D0C0D 80%, #0D0C0D 10%) !important;
+}
+.bg-section {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1e3a8a 100%) !important;
+}
 /* Esconde completamente a barra de rolagem (scrollbar) */
 
-/* Esconde completamente a barra de rolagem (scrollbar) */
-::-webkit-scrollbar {
-  background-color:  #0D0C0D !important;
-}
-::-webkit-scrollbar-thumb,
-::-webkit-scrollbar-track,
-::-webkit-scrollbar-button {
-  display: none !important;
-  background-color: #0D0C0D !important;
-  border: none !important;
-}
 
 html {
   scrollbar-width: none !important;
