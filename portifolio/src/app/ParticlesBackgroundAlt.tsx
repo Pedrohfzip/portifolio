@@ -20,7 +20,7 @@ export default function ParticlesBackgroundAlt() {
     const particles = Array.from({ length: NUM_PARTICLES }, (_, i) => ({
       x: Math.random() * width,
       y: Math.random() * height,
-  r: 3 + Math.random() * 3,
+      r: 3 + Math.random() * 3,
       color: `hsl(${Math.random() * 360}, 80%, 60%)`,
       speed: 0.7 + Math.random() * 1.2,
       angle: Math.random() * Math.PI * 2,
@@ -32,18 +32,19 @@ export default function ParticlesBackgroundAlt() {
     // Mouse state
     const mouse = { x: -1000, y: -1000 };
 
+    let running = true;
     function animate() {
-      if (!ctx) return;
+      if (!ctx || !running) return;
       ctx.clearRect(0, 0, width, height);
       const now = performance.now();
-      particles.forEach(p => {
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
         // Fade-in gradual
         if (now >= p.bornAt && p.opacity < p.targetOpacity) {
           p.opacity += 0.03;
           if (p.opacity > p.targetOpacity) p.opacity = p.targetOpacity;
         }
-        if (now < p.bornAt) return; // ainda não nasceu
-
+        if (now < p.bornAt) continue; // ainda não nasceu
         // Interação com mouse: afasta se estiver próxima
         const distMouse = Math.hypot(p.x - mouse.x, p.y - mouse.y);
         if (distMouse < 100) {
@@ -51,7 +52,6 @@ export default function ParticlesBackgroundAlt() {
           p.x += Math.cos(angleAway) * 6 * (1 - distMouse / 100);
           p.y += Math.sin(angleAway) * 6 * (1 - distMouse / 100);
         }
-
         // Movimento aleatório
         p.angle += (Math.random() - 0.5) * 0.1;
         p.x += Math.cos(p.angle) * p.speed;
@@ -71,10 +71,19 @@ export default function ParticlesBackgroundAlt() {
         ctx.shadowBlur = 16;
         ctx.fill();
         ctx.restore();
-      });
+      }
       requestAnimationFrame(animate);
     }
 
+    // Otimização: pausa animação se canvas não está visível
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        running = entry.isIntersecting;
+        if (running) animate();
+      },
+      { threshold: 0.01 }
+    );
+    observer.observe(canvas);
     animate();
 
     // Mouse listeners
@@ -105,6 +114,8 @@ export default function ParticlesBackgroundAlt() {
       window.removeEventListener("resize", handleResize);
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleMouseLeave);
+      observer.disconnect();
+      running = false;
     };
   }, []);
 

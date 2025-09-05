@@ -43,7 +43,14 @@ export default function ParticlesBackground() {
         points: Array.from({ length: SNAKE_LENGTH }, () => ({ x: start.x, y: start.y })),
         angle: Math.random() * Math.PI * 2,
         speed: 1.2 + Math.random() * 0.7,
-        color: `hsl(${Math.random() * 360}, 80%, 60%)`,
+        // Tons escuros: cinza, azul escuro, verde escuro, roxo escuro
+        color: [
+          '#22272e', // cinza escuro
+          '#1a2330', // azul escuro
+          '#23322d', // verde escuro
+          '#2a2233', // roxo escuro
+          '#111311', // quase preto
+        ][Math.floor(Math.random() * 5)],
         bornAt: performance.now() + i * 900, // cada cobra nasce com delay
         opacity: 0,
       };
@@ -51,28 +58,27 @@ export default function ParticlesBackground() {
 
     const mouse = { x: -1000, y: -1000 };
 
+    let running = true;
     function animate() {
-      if (!ctx) return;
+      if (!ctx || !running) return;
       ctx.clearRect(0, 0, width, height);
       const now = performance.now();
-      snakes.forEach(snake => {
+      for (let s = 0; s < snakes.length; s++) {
+        const snake = snakes[s];
         // Fade-in gradual
         if (now >= snake.bornAt && snake.opacity < 1) {
           snake.opacity += 0.03;
           if (snake.opacity > 1) snake.opacity = 1;
         }
-        if (now < snake.bornAt) return; // ainda não nasceu
-
+        if (now < snake.bornAt) continue; // ainda não nasceu
         // Interação com mouse: afasta a cabeça se estiver próxima
         const head = snake.points[0];
         const distMouse = Math.hypot(head.x - mouse.x, head.y - mouse.y);
         if (distMouse < 120) {
           const angleAway = Math.atan2(head.y - mouse.y, head.x - mouse.x);
-          // Aplica força para afastar
           head.x += Math.cos(angleAway) * 8 * (1 - distMouse / 120);
           head.y += Math.sin(angleAway) * 8 * (1 - distMouse / 120);
         }
-
         // Move cabeça normalmente
         snake.angle += (Math.random() - 0.5) * 0.2; // movimento suave
         head.x += Math.cos(snake.angle) * snake.speed;
@@ -106,7 +112,6 @@ export default function ParticlesBackground() {
             p1.x < margin || p1.x > width - margin ||
             p1.y < margin || p1.y > height - margin
           ) {
-            // Quanto mais perto da borda, menor a opacidade
             const dx = Math.min(p1.x, width - p1.x, margin);
             const dy = Math.min(p1.y, height - p1.y, margin);
             const dist = Math.min(dx, dy);
@@ -119,15 +124,24 @@ export default function ParticlesBackground() {
           ctx.lineWidth = 6;
           ctx.globalAlpha = alpha;
           ctx.shadowColor = snake.color;
-          ctx.shadowBlur = 16;
+          ctx.shadowBlur = 2; // sombra discreta
           ctx.stroke();
         }
         ctx.globalAlpha = 1;
         ctx.restore();
-      });
+      }
       requestAnimationFrame(animate);
     }
 
+    // Otimização: pausa animação se canvas não está visível
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        running = entry.isIntersecting;
+        if (running) animate();
+      },
+      { threshold: 0.01 }
+    );
+    observer.observe(canvas);
     animate();
 
     function handleResize() {
@@ -158,6 +172,8 @@ export default function ParticlesBackground() {
       window.removeEventListener("resize", handleResize);
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleMouseLeave);
+      observer.disconnect();
+      running = false;
     };
   }, []);
 
