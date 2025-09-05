@@ -75,12 +75,21 @@ export default function Home() {
 
   return (
     <div
-      className={`m-0 p-0 h-screen w-screen scroll-smooth ${bgClass} ${isDesktop ? 'overflow-y-auto overflow-x-hidden scroll-smooth snap-y snap-mandatory' : ''} `}
+      className={`m-0 p-0 h-screen w-screen scroll-smooth ${isDesktop ? 'overflow-y-auto overflow-x-hidden scroll-smooth snap-y snap-mandatory' : ''} `}
     >
+      <nav className="fixed top-0 left-0 w-full z-50  backdrop-blur-md flex justify-center items-center h-14">
+        <ul className="flex space-x-8 text-white font-semibold text-lg">
+          <li><a href="#header">Sobre</a></li>
+          <li><a href="#next-section">Experiências</a></li>
+          <li><a href="#projeto">Projetos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
       <header
         ref={headerRef}
         className="w-screen h-screen flex flex-col align-center snap-start"
         id="header"
+        style={{ paddingTop: '56px' }} // espaço para a navbar
       >
         {!showAltParticles && <ParticlesBackground />}
         <div className="w-screen h-screen flex flex-col items-center justify-around relative z-9 pt-10">
@@ -185,7 +194,37 @@ export default function Home() {
         className="w-screen h-screen flex items-center justify-center text-white snap-start relative"
       >
         {showAltParticles && <ParticlesBackgroundAlt />}
-        <h2 className="text-4xl font-bold relative z-10">Próxima Sessão</h2>
+        <div className="relative flex flex-col justify-center align-center  z-10 max-w-xl  pl-4">  
+          {/* Linha vertical à esquerda */}
+          <div className="absolute left-0 top-0 bottom-35 w-1"  style={{ background: "#111311" }} ></div>
+          {/* Ponto 1 */}
+          <div className="flex items-center mb-20">
+            <div className="ml-0">
+              <h3 className="font-bold text-xl">Desenvolvedor Full Stack trainee</h3>
+              <p className="text-sm text-gray-200">NDM Advogados, 2024 - 2025</p>
+              <p className="text-gray-300 text-sm">Desenvolvimento full stack de aplicações web com React, Node.js e PostgreSQL, incluindo testes automatizados e suporte ao usuário.</p>
+            </div>
+          </div>
+          {/* Ponto 2 */}
+          <div className="flex items-center mb-20">
+            <div className="ml-0">
+              <h3 className="font-bold text-xl">Suporte Técnico em TI</h3>
+              <p className="text-sm text-gray-200">Trombini Embalagens, 2022 - 2023</p>
+              <p className="text-gray-300 text-sm">Atendimento e suporte a usuários, manutenção de hardware e software.</p>
+            </div>
+          </div>
+          <div className="flex justify-center pt-6">
+            <a
+              href="#next-section"
+              aria-label="Ir para a próxima sessão"
+              className="flex arrow-group  arrow-icon z-11"
+            >
+                <span className="arrow-circle">
+                <IoIosArrowDown className="arrow-icon"/>
+              </span>
+            </a>
+          </div>
+        </div>
       </section>
     </div>
   );

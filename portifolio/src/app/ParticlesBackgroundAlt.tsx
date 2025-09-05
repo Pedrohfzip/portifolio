@@ -16,11 +16,11 @@ export default function ParticlesBackgroundAlt() {
     canvas.height = height;
 
     const now = performance.now();
-    const NUM_PARTICLES = 25;
+    const NUM_PARTICLES = 15;
     const particles = Array.from({ length: NUM_PARTICLES }, (_, i) => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      r: 7 + Math.random() * 8,
+  r: 3 + Math.random() * 3,
       color: `hsl(${Math.random() * 360}, 80%, 60%)`,
       speed: 0.7 + Math.random() * 1.2,
       angle: Math.random() * Math.PI * 2,
