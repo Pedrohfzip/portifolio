@@ -46,7 +46,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
         if (w > 1200) setImgSize(400);
         else if (w > 900) setImgSize(350);
         else if (w > 600) setImgSize(350);
-        else setImgSize(120);
+        else setImgSize(300);
       }
       handleResize();
       window.addEventListener("resize", handleResize);
