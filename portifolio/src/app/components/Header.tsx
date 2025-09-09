@@ -1,8 +1,9 @@
 "use client";
-import ParticlesBackground from "../threeJS/ParticlesBackground";
 import MeshBackground from "../threeJS/MeshBackground";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { setActiveSection } from "../store/navbarSlice";
 import { useEffect, useRef, forwardRef, useState } from "react";
 import { SiJavascript, SiReact, SiNodedotjs } from "react-icons/si";
 import { IoIosArrowDown } from "react-icons/io";
@@ -26,11 +27,19 @@ function useTypewriter(text: string, speed = 40) {
 
 const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
   function Header({ showAltParticles }, ref) {
+    const dispatch = useDispatch();
     const text = "Desenvolvo soluções eficientes, escaláveis e inovadoras, com foco em qualidade e experiência do usuário. Sempre em evolução, aprendendo e me adaptando às novas tecnologias.";
     const typedText = useTypewriter(text, 30);
     const [imgSize, setImgSize] = useState(350);
     const localRef = useRef<HTMLDivElement>(null);
     const isInView = useInView(localRef, { once: false });
+
+    // Atualiza o estado global do navbar quando a sessão está visível
+    useEffect(() => {
+      if (isInView) {
+        dispatch(setActiveSection("header"));
+      }
+    }, [isInView, dispatch]);
 
     useEffect(() => {
       function handleResize() {
@@ -53,9 +62,9 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
         style={{ paddingTop: '56px' }}
       >
         {showAltParticles && <MeshBackground />}
-        <div ref={localRef} className="w-screen h-screen flex flex-col items-center justify-around relative z-9 pt-10">
-          <div className="flex flex-col items-center space-y-4 text-white-700 z-11">
-            <div className="flex flex-row items-center justify-center space-x-8">
+        <div ref={localRef} className="w-screen h-screen flex flex-col items-center justify-center relative z-9 pt-2 pb-2">
+          <div className="flex flex-col items-center space-y-2 text-white-700 z-11">
+            <div className="flex flex-row items-center justify-center space-x-4">
               <motion.div
                 initial={{ x: 0, opacity: 1 }}
                 animate={isInView ? { x: [0, 4, -4, 4, 0], y: [0, -4, 0, 4, 0] } : { x: 0, y: 0 }}
@@ -77,7 +86,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
               animate={isInView ? { x: 0, opacity: 1 } : { x: 200, opacity: 0 }}
               transition={{ duration: 1 }}
               className="m-0 p-0 font-extrabold text-2xl"
-              style={{ fontSize: "30px" }}
+              style={{ fontSize: "28px" }}
             >
               Olá, meu nome é Pedro!
             </motion.h4>
@@ -86,12 +95,12 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
               animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
               transition={{ duration: 1 }}
               className="m-0 p-0 font-medium text-lg"
-              style={{ fontSize: "20px" }}
+              style={{ fontSize: "18px" }}
             >
               Sou desenvolvedor web.
             </motion.h5>
             <motion.p
-              className="relative text-center  mt-2 mb-2 p-2  text-white-900 rounded-2xl shadow-lg max-w-xs text-sm"
+              className="relative text-center mt-1 mb-1 p-1 text-white-900 rounded-2xl shadow-lg max-w-xs text-sm"
               style={{ fontSize: "12px", minWidth: "100px", backgroundColor: "#171717ff" }}
               initial={{ opacity: 1, x: 0 }}
               animate={isInView ? { x: [0, 2, -2, 2, 0], y: [0, -2, 3, 2, 0] } : { x: 0, y: 0 }}
@@ -100,7 +109,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
               <motion.span className="block">{typedText}<span className="animate-pulse">|</span></motion.span>
             </motion.p>
             <motion.div
-              className="flex flex-row items-center justify-center space-x-6 pt-4 text-3xl"
+              className="flex flex-row items-center justify-center space-x-4 pt-2 text-2xl"
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               variants={{
@@ -140,7 +149,8 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
             </motion.div>
           </div>
         </div>
-        <div className="flex justify-center pb-6">
+        <div className="flex flex-col items-center mt-[-4px] justify-center pb-6">
+          <span className="mt-4 text-white">Experiências</span>
           <a
             href="#next-section"
             aria-label="Ir para a próxima sessão"

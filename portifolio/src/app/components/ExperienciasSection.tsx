@@ -1,17 +1,26 @@
 "use client";
 import { IoIosArrowDown } from "react-icons/io";
-import { RefObject } from "react";
+import { RefObject, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { setActiveSection } from "../store/navbarSlice";
 
-export default function ExperienciasSection({ showAltParticles, sectionRef }: { showAltParticles: string, sectionRef: RefObject<HTMLDivElement | null> }) {
+export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement | null> }) {
   const localRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(localRef, { once: false });
+  const isInView = useInView(localRef, { once: false, amount: 0.7 });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isInView) {
+      dispatch(setActiveSection("experiencias"));
+    }
+  }, [isInView, dispatch]);
+
   return (
     <section
       ref={sectionRef}
       id="next-section"
-      className="w-screen h-screen flex items-center justify-center text-white snap-start relative"
+      className="w-screen h-screen h-100 flex items-center justify-center text-white snap-start relative"
     >
       <div ref={localRef} className="relative flex flex-col justify-center align-center z-10 max-w-xl pl-4">
         {/* Linha vertical animada */}
@@ -48,9 +57,10 @@ export default function ExperienciasSection({ showAltParticles, sectionRef }: { 
             <p className="text-gray-300 text-sm">Atendimento e suporte a usuários, manutenção de hardware e software.</p>
           </div>
         </motion.div>
-        <div className="flex justify-center pt-6">
+        <div className="flex flex-col items-center justify-center pt-6">
+          <span className="mt-4 text-white">Projetos</span>
           <a
-            href="#next-section"
+            href="#projeto"
             aria-label="Ir para a próxima sessão"
             className="flex arrow-group arrow-icon z-11"
           >

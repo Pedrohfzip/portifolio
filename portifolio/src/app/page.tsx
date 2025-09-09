@@ -1,15 +1,21 @@
 "use client";
 import ExperienciasSection from "./components/ExperienciasSection";
 import Header from "./components/Header";
-import { useEffect, useState, useRef } from "react";
+import Navbar from "./components/Navbar";
+import ProjetosSection from "./components/ProjetosSection";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveSection } from "./store/navbarSlice";
+import type { RootState } from "./store/store";
 
 
 export default function Home() {
   const headerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [showAltParticles, setActiveSection] = useState<string>("header");
+  const dispatch = useDispatch();
+  const activeSection = useSelector((state: RootState) => state.navbar.activeSection);
   const [isDesktop, setIsDesktop] = useState(true);
-
+  
   useEffect(() => {
     const header = headerRef.current;
     const section = sectionRef.current;
@@ -18,10 +24,10 @@ export default function Home() {
       (entries) => {
         entries.forEach(entry => {
           if (entry.target === header && entry.isIntersecting) {
-            setActiveSection("header");
+            dispatch(setActiveSection("header"));
           }
           if (entry.target === section && entry.isIntersecting) {
-            setActiveSection("experiencias");
+            dispatch(setActiveSection("experiencias"));
           }
         });
       },
@@ -32,8 +38,11 @@ export default function Home() {
     );
     observer.observe(header);
     observer.observe(section);
+      console.log(activeSection);
     return () => observer.disconnect();
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
   useEffect(() => {
     const checkScreen = () => {
       setIsDesktop(window.innerWidth >= 768);
@@ -47,16 +56,10 @@ export default function Home() {
     <div
       className={`m-0 p-0 h-screen w-screen scroll-smooth ${isDesktop ? 'overflow-y-auto overflow-x-hidden scroll-smooth snap-y snap-mandatory' : ''} `}
     >
-      <nav className="fixed w-full z-50  backdrop-blur-md flex justify-center items-center h-14">
-        <ul className="flex space-x-4 text-white font-semibold text-lg">
-          <li><a href="#header">Sobre</a></li>
-          <li><a href="#next-section">Experiências</a></li>
-          <li><a href="#projeto">Projetos</a></li>
-          <li><a href="#contato">Contato</a></li>
-        </ul>
-      </nav>
-      <Header showAltParticles={showAltParticles} />
-      <ExperienciasSection showAltParticles={showAltParticles} sectionRef={sectionRef} />
+  <Navbar />
+    <Header showAltParticles={activeSection} />
+    <ExperienciasSection sectionRef={sectionRef} />
+    <ProjetosSection /> 
     </div>
   );
 }

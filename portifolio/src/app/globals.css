@@ -1,3 +1,9 @@
+/* Navbar palavra ativa: branco com sombra para cima */
+.navbar-active {
+  text-shadow: 4px 4px 5px rgba(255, 255, 255, 0.446);
+  font-weight: bold;
+  font-size: 1.5em;
+}
 /* Backgrounds para troca dinâmica */
 .bg-header {
   background: radial-gradient(circle at left, #090A09 50%, #0D0C0D, #0D0C0D, #0D0C0D 80%, #0D0C0D 10%) !important;
