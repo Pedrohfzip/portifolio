@@ -18,11 +18,11 @@ export default function ContactForm() {
     }
   }, [isInView, dispatch]);
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
     // Aqui você pode integrar com um serviço de email, ex: EmailJS, Formspree, etc.
