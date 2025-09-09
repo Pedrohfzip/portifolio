@@ -36,7 +36,7 @@ export default function Navbar() {
         </li>
       </ul>
       {/* Mobile hamburger */}
-      <div className="fixed top-0 left-0 md:hidden flex items-center w-full justify-between px-4">
+      <div className="fixed top-0 left-0 md:hidden flex items-center w-full justify-between p-4">
         <button
           className="flex flex-col justify-center items-center w-10 h-10"
           aria-label="Abrir menu"

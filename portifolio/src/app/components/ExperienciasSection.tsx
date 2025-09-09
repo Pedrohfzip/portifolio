@@ -5,6 +5,8 @@ import { motion, useInView } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setActiveSection } from "../store/navbarSlice";
 import MeshBackground from "../threeJS/MeshBackground";
+import { SiReact, SiNodedotjs, SiPostgresql, SiLinux } from "react-icons/si";
+import { FaWindows } from "react-icons/fa";
 
 export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement | null> }) {
   const localRef = useRef<HTMLDivElement>(null);
@@ -55,9 +57,20 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <div className="ml-0">
-            <h3 className="font-bold text-xl">Desenvolvedor Full Stack trainee</h3>
+            <h3 className={`font-bold ${isDesktop ? 'text-xl' : 'text-lg'} flex items-center gap-2`}>
+              Desenvolvedor Full Stack trainee
+              <span className="flex gap-1 text-base text-cyan-300 opacity-80">
+                <SiReact />
+                <SiNodedotjs />
+                <SiPostgresql />
+              </span>
+            </h3>
             <p className="text-sm text-gray-200">NDM Advogados, 2024 - 2025</p>
-            <p className="text-gray-300 text-sm">Desenvolvimento full stack de aplicações web com React, Node.js e PostgreSQL, incluindo testes automatizados e suporte ao usuário.</p>
+            <p className="text-gray-300 text-sm">
+              Desenvolvimento de aplicações web com React, Node.js e PostgreSQL.<br/>
+              APIs REST, autenticação JWT, integração de sistemas e deploy automatizado.<br/>
+              Suporte técnico e treinamento de usuários.
+            </p>
           </div>
         </motion.div>
         {/* Experiência 2 */}
@@ -68,9 +81,18 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
         >
           <div className="ml-0">
-            <h3 className="font-bold text-xl">Suporte Técnico em TI</h3>
+            <h3 className={`font-bold ${isDesktop ? 'text-xl' : 'text-lg'} flex items-center gap-2`}>
+              Suporte Técnico em TI
+              <span className="flex gap-1 text-base text-gray-300 opacity-70">
+                <FaWindows />
+                <SiLinux />
+              </span>
+            </h3>
             <p className="text-sm text-gray-200">Trombini Embalagens, 2022 - 2023</p>
-            <p className="text-gray-300 text-sm">Atendimento e suporte a usuários, manutenção de hardware e software.</p>
+            <p className="text-gray-300 text-sm">
+              Atendimento a usuários, manutenção de hardware/software e configuração de sistemas.<br/>
+              Treinamento, implantação de ferramentas e relatórios de TI.
+            </p>
           </div>
         </motion.div>
       </div>

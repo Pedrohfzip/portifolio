@@ -1,17 +1,28 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function MeshBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    function checkMobile() {
+      setIsMobile(window.innerWidth < 768);
+    }
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    let animationId: number;
 
-    let width = window.innerWidth;
-    let height = window.innerHeight;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
     canvas.width = width;
     canvas.height = height;
 
@@ -25,7 +36,7 @@ export default function MeshBackground() {
 
     const mouse = { x: -1000, y: -1000 };
 
-    function animate() {
+    function draw() {
       if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
       // Atualiza pontos
@@ -75,45 +86,23 @@ export default function MeshBackground() {
         ctx.fill();
         ctx.restore();
       }
-      requestAnimationFrame(animate);
     }
-    animate();
-
-    function handleResize() {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      if (canvas) {
-        canvas.width = width;
-        canvas.height = height;
+    function animate() {
+      draw();
+      if (!isMobile) {
+        animationId = requestAnimationFrame(animate);
       }
     }
-    window.addEventListener("resize", handleResize);
-
-    function handleMouseMove(e: MouseEvent) {
-      if (!canvas) return;
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-    }
-    function handleMouseLeave() {
-      mouse.x = -1000;
-      mouse.y = -1000;
-    }
-    canvas.addEventListener("mousemove", handleMouseMove);
-    canvas.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      canvas.removeEventListener("mousemove", handleMouseMove);
-      canvas.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
+    animate();
+    return () => cancelAnimationFrame(animationId);
+  }, [isMobile]);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute w-full h-full z-8"
-      style={{ pointerEvents: "auto", cursor: "pointer" }}
+      width={window.innerWidth}
+      height={window.innerHeight}
+      className="absolute top-0 left-0 w-full h-full z-0"
     />
   );
 }

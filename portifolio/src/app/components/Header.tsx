@@ -29,7 +29,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
     const dispatch = useDispatch();
     const text = "Tenho 23 anos e curto desenvolver soluções práticas e inovadoras, sempre pensando na qualidade e na experiência de quem usa. Estou em constante evolução, aprendendo e me adaptando às novas tecnologias.";
     const typedText = useTypewriter(text, 30);
-    const [imgSize, setImgSize] = useState(350);
+    const [imgSize, setImgSize] = useState(400);
     const localRef = useRef<HTMLDivElement>(null);
     const isInView = useInView(localRef, { once: false, amount: 0.7 });
 
@@ -43,9 +43,9 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
     useEffect(() => {
       function handleResize() {
         const w = window.innerWidth;
-        if (w > 1200) setImgSize(350);
-        else if (w > 900) setImgSize(280);
-        else if (w > 600) setImgSize(200);
+        if (w > 1200) setImgSize(400);
+        else if (w > 900) setImgSize(350);
+        else if (w > 600) setImgSize(350);
         else setImgSize(120);
       }
       handleResize();
@@ -64,18 +64,16 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
       >
         <MeshBackground />
         {/* Título discreto só no mobile */}
-        {!isDesktop && (
-          <div className="w-full flex justify-center">
-            <span className="block text-sm text-white opacity-70 mb-2 text-center">Home</span>
-          </div>
-        )}
         <div ref={localRef} className="w-screen h-screen flex flex-col items-center justify-center relative z-9 ">
           <div className="flex flex-col items-center space-y-2 text-white-700 z-11">
             <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
+                      {!isDesktop && (
+                <div className="w-full flex justify-center">
+                  <span className="block text-sm text-white opacity-70 mb-2 text-center">Sobre Mim</span>
+                </div>
+              )}
               <motion.div
-                initial={{ y: 0, opacity: 1 }}
-                animate={isInView ? { x: [0, 4, -4, 4, 0], y: [0, -4, 0, 4, 0] } : { x: 0, y: 0 }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                initial={{ x: 0, opacity: 1 }}
                 style={{ display: "inline-block" }}
               >
                 <Image
@@ -112,7 +110,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
                   initial={{ opacity: 1, x: 0 }}
                   transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <motion.span className="block">{typedText}<span className="animate-pulse">|</span></motion.span>
+                  <motion.span className={isDesktop ? `block` : `block text-base`}>{typedText}<span className="animate-pulse">|</span></motion.span>
                 </motion.p>
               </motion.div>
             </div>
@@ -142,7 +140,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
                 <FaGithub />
               </motion.a>
               <motion.a
-                href="https://www.linkedin.com/in/pedro-h-fagundes/"
+                href="https://www.linkedin.com/in/pedro-h-fagundes"
                 target="_blank"
                 rel="noopener noreferrer"
                 title="LinkedIn"
