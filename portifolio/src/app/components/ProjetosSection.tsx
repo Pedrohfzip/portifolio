@@ -23,7 +23,7 @@ export default function ProjetosSection() {
   }, [isInView, dispatch]);
 
   return (
-    <section ref={localRef} id="projeto" className="w-screen h-screen flex flex-col items-center justify-center bg-transparent py-10 snap-start">
+    <section ref={localRef} id="projeto" className="w-screen h-screen flex flex-col items-center justify-center bg-transparent py-10 snap-center">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl px-4">
         {projetos.map((projeto, idx) => (
           <motion.div
