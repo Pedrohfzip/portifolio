@@ -15,11 +15,8 @@ export default function ParticlesBackground() {
     canvas.width = width;
     canvas.height = height;
 
-    // Cada "cobra" é uma trilha de pontos
-    const NUM_SNAKES = 7;
+    const NUM_SNAKES = 5;
     const SNAKE_LENGTH = 40;
-    // Cada cobra tem um tempo de "nascimento" e opacidade inicial
-    // Função para gerar ponto próximo da borda
     function randomEdgePoint() {
       const edge = Math.floor(Math.random() * 4);
       const margin = 60;
