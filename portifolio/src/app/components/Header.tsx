@@ -27,7 +27,7 @@ function useTypewriter(text: string, speed = 40) {
 const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
   function Header({ }, ref) {
     const dispatch = useDispatch();
-    const text = "Tenho 23 anos e curto desenvolver soluções práticas e inovadoras, sempre pensando na qualidade e na experiência de quem usa. Estou em constante evolução, aprendendo e me adaptando às novas tecnologias.";
+    const text = "Tenho 23 anos e curto desenvolver soluções práticas e inovadoras, sempre pensando na qualidade do código e na experiência do usuário.";
     const typedText = useTypewriter(text, 30);
     const [imgSize, setImgSize] = useState(400);
     const inViewRef = useRef<HTMLDivElement>(null);
@@ -104,12 +104,12 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
                     Sou desenvolvedor web.
                 </motion.h5>
                 <motion.p
-                  className="relative text-center mt-1 mb-1 p-1 text-white-900 rounded-2xl shadow-lg max-w-xs text-sm"
+                  className="relative text-center mt-1 mb-1 p-1 text-white-900 rounded-2xl shadow-lg max-w-xs"
                   style={{ fontSize: "12px", minWidth: "100px", backgroundColor: "#171717ff" }}
                   initial={{ opacity: 1, x: 0 }}
                   transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <motion.span className={isDesktop ? `block` : `block text-base`}>{typedText}<span className="animate-pulse">|</span></motion.span>
+                  <motion.span className={isDesktop ? `block text-base` : `block text-base`}>{typedText}<span className="animate-pulse">|</span></motion.span>
                 </motion.p>
               </motion.div>
             </div>
