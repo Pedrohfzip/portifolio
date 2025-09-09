@@ -32,7 +32,7 @@ function chunkArray<T>(arr: T[], size: number): T[][] {
 }
 
 export default function SkillsSection() {
-  const skillRows = chunkArray(skills, 4);
+  const skillRows = chunkArray(skills, 3);
   const localRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(localRef, { once: false, amount: 0.7 });
   const dispatch = useDispatch();

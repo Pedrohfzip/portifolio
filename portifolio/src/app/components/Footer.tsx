@@ -31,7 +31,7 @@ export default function Footer() {
       style={{ scrollSnapAlign: "end" }}
     >
       <motion.div
-        className="flex flex-row gap-6 mb-4"
+        className="flex flex-row gap-3 mb-4"
         initial={{ opacity: 0, y: 40 }}
         animate={animateLinks}
         transition={{ duration: 0.8 }}
