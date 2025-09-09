@@ -100,8 +100,8 @@ export default function MeshBackground() {
   return (
     <canvas
       ref={canvasRef}
-      width={typeof window !== "undefined" ? window.innerWidth : 1200}
-      height={typeof window !== "undefined" ? window.innerHeight : 800}
+      // width={typeof window !== "undefined" ? window.innerWidth : 1200}
+      // height={typeof window !== "undefined" ? window.innerHeight : 800}
       className="absolute top-0 left-0 w-full h-full z-0"
     />
   );

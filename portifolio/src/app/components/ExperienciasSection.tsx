@@ -1,5 +1,4 @@
 "use client";
-// ...existing code...
 import { RefObject, useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { useDispatch } from "react-redux";
