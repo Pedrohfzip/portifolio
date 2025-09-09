@@ -1,18 +1,27 @@
 "use client";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { RefObject, useRef, useEffect } from "react";
+// ...existing code...
+import { RefObject, useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setActiveSection } from "../store/navbarSlice";
+import MeshBackground from "../threeJS/MeshBackground";
 
 export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement | null> }) {
   const localRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(localRef, { once: false, amount: 0.7 });
   const dispatch = useDispatch();
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    setIsDesktop(window.innerWidth >= 768);
+    const handleResize = () => setIsDesktop(window.innerWidth >= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (isInView) {
-      dispatch(setActiveSection("experiencias"));
+      dispatch(setActiveSection("next-section"));
     }
   }, [isInView, dispatch]);
 
@@ -22,18 +31,13 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
       id="next-section"
       className="w-screen h-screen max-h-screen flex flex-col items-center justify-center text-white snap-center relative"
     >
-      <div className="flex flex-col items-center justify-center pt-20 pb-10">
-        <span style={{color: "#3a3a3aff", fontWeight: "bold"}} className="text-white">Sobre</span>
-        <a
-          href="#header"
-          aria-label="Ir para a próxima sessão"
-          className="flex arrow-group arrow-icon z-11"
-        >
-          <span className="arrow-circle">
-            <IoIosArrowUp className="arrow-icon" />
-          </span>
-        </a>
-      </div>
+      <MeshBackground />
+      {/* Título centralizado só no mobile */}
+      {!isDesktop && (
+        <div className="w-full flex justify-center items-center">
+          <span className="block text-sm text-white opacity-70 mb-2 text-center">Experiências</span>
+        </div>
+      )}
       <div ref={localRef} className="relative flex flex-col justify-center align-center z-10 max-w-xl pl-4">
         {/* Linha vertical animada */}
         <motion.div
@@ -69,18 +73,6 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
             <p className="text-gray-300 text-sm">Atendimento e suporte a usuários, manutenção de hardware e software.</p>
           </div>
         </motion.div>
-        <div className="flex flex-col items-center justify-center pt-6 pb-0">
-          <span style={{color: "#3a3a3aff", fontWeight: "bold"}} className="mt-4 text-white">Projetos</span>
-          <a
-            href="#projeto"
-            aria-label="Ir para a próxima sessão"
-            className="flex arrow-group arrow-icon z-11"
-          >
-            <span className="arrow-circle">
-              <IoIosArrowDown className="arrow-icon" />
-            </span>
-          </a>
-        </div>
       </div>
     </section>
   );

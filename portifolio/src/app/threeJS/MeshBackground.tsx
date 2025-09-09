@@ -112,7 +112,7 @@ export default function MeshBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute top-0 left-0 w-full h-full z-8"
+      className="absolute w-full h-full z-8"
       style={{ pointerEvents: "auto", cursor: "pointer" }}
     />
   );

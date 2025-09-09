@@ -19,7 +19,7 @@ export default function Navbar() {
         <li>
           <a
             href="#next-section"
-            className={activeSection === "experiencias" ? "text-white navbar-active" : "text-white"}
+            className={activeSection === "next-section" ? "text-white navbar-active" : "text-white"}
           >Experiências</a>
         </li>
         <li>

@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setActiveSection } from "../store/navbarSlice";
 import { useEffect, useRef, forwardRef, useState } from "react";
-import { SiJavascript, SiReact, SiNodedotjs } from "react-icons/si";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 
 function useTypewriter(text: string, speed = 40) {
@@ -32,7 +32,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
     const typedText = useTypewriter(text, 30);
     const [imgSize, setImgSize] = useState(350);
     const localRef = useRef<HTMLDivElement>(null);
-    const isInView = useInView(localRef, { once: false });
+    const isInView = useInView(localRef, { once: false, amount: 0.7 });
 
     // Atualiza o estado global do navbar quando a sessão está visível
     useEffect(() => {
@@ -54,6 +54,8 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
       return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    // Detecta se é mobile
+    const isDesktop = typeof window !== "undefined" ? window.innerWidth >= 768 : true;
     return (
       <header
         ref={ref}
@@ -61,10 +63,16 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
         id="header"
         style={{ paddingTop: '56px' }}
       >
-        {showAltParticles && <MeshBackground />}
-        <div ref={localRef} className="w-screen h-screen flex flex-col items-center justify-center relative z-9 pt-2 pb-2">
+        <MeshBackground />
+        {/* Título discreto só no mobile */}
+        {!isDesktop && (
+          <div className="w-full flex justify-center">
+            <span className="block text-sm text-white opacity-70 mb-2 text-center">Home</span>
+          </div>
+        )}
+        <div ref={localRef} className="w-screen h-screen flex flex-col items-center justify-center relative z-9 ">
           <div className="flex flex-col items-center space-y-2 text-white-700 z-11">
-            <div className="flex flex-row items-center justify-center space-x-4">
+            <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
               <motion.div
                 initial={{ y: 0, opacity: 1 }}
                 animate={isInView ? { x: [0, 4, -4, 4, 0], y: [0, -4, 0, 4, 0] } : { x: 0, y: 0 }}
@@ -80,34 +88,37 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
                   style={{ minWidth: '400px' }}
                 />
               </motion.div>
+              <motion.div>
+                <motion.h4
+                  initial={{ x: 200, opacity: 0 }}
+                  animate={isInView ? { x: 0, opacity: 1 } : { x: 200, opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  className="m-0 p-0 font-extrabold text-2xl"
+                  style={{ fontSize: "28px" }}
+                  >
+                    Olá, meu nome é Pedro!
+                  </motion.h4>
+                  <motion.h5
+                    initial={{ x: -200, opacity: 0 }}
+                    animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
+                    transition={{ duration: 1 }}
+                    className="m-0 p-0 font-medium text-lg"
+                    style={{ fontSize: "18px" }}
+                  >
+                    Sou desenvolvedor web.
+                </motion.h5>
+                <motion.p
+                  className="relative text-center mt-1 mb-1 p-1 text-white-900 rounded-2xl shadow-lg max-w-xs text-sm"
+                  style={{ fontSize: "12px", minWidth: "100px", backgroundColor: "#171717ff" }}
+                  initial={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <motion.span className="block">{typedText}<span className="animate-pulse">|</span></motion.span>
+                </motion.p>
+              </motion.div>
             </div>
-            <motion.h4
-              initial={{ x: 200, opacity: 0 }}
-              animate={isInView ? { x: 0, opacity: 1 } : { x: 200, opacity: 0 }}
-              transition={{ duration: 1 }}
-              className="m-0 p-0 font-extrabold text-2xl"
-              style={{ fontSize: "28px" }}
-            >
-              Olá, meu nome é Pedro!
-            </motion.h4>
-            <motion.h5
-              initial={{ x: -200, opacity: 0 }}
-              animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
-              transition={{ duration: 1 }}
-              className="m-0 p-0 font-medium text-lg"
-              style={{ fontSize: "18px" }}
-            >
-              Sou desenvolvedor web.
-            </motion.h5>
-            <motion.p
-              className="relative text-center mt-1 mb-1 p-1 text-white-900 rounded-2xl shadow-lg max-w-xs text-sm"
-              style={{ fontSize: "12px", minWidth: "100px", backgroundColor: "#171717ff" }}
-              initial={{ opacity: 1, x: 0 }}
-              animate={isInView ? { x: [0, 2, -2, 2, 0], y: [0, -2, 3, 2, 0] } : { x: 0, y: 0 }}
-              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <motion.span className="block">{typedText}<span className="animate-pulse">|</span></motion.span>
-            </motion.p>
+
+
             <motion.div
               className="flex flex-row items-center justify-center space-x-4 pt-2 text-2xl"
               initial="hidden"
@@ -119,47 +130,42 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
                 }
               }}
             >
-              <motion.span
-                title="JavaScript"
-                className="text-yellow-400"
+              <motion.a
+                href="https://github.com/Pedrohfzip"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="GitHub"
+                className="text-white hover:text-white"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6 }}
               >
-                <SiJavascript />
-              </motion.span>
-              <motion.span
-                title="React.js"
-                className="text-cyan-400"
+                <FaGithub />
+              </motion.a>
+              <motion.a
+                href="https://www.linkedin.com/in/pedrohenriquezip/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="LinkedIn"
+                className="text-white hover:text-white"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.25 }}
               >
-                <SiReact />
-              </motion.span>
-              <motion.span
-                title="Node.js"
-                className="text-green-600"
+                <FaLinkedin />
+              </motion.a>
+              <motion.a
+                href="mailto:pedrohenriquezip@gmail.com"
+                title="Email"
+                className="text-white hover:text-white"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
-                <SiNodedotjs />
-              </motion.span>
+                <FaEnvelope />
+              </motion.a>
             </motion.div>
           </div>
-        </div>
-        <div className="flex flex-col items-center mt-[-4px] justify-center pb-6">
-          <span style={{color: "#3a3a3aff", fontWeight: "bold"}} className="mt-4">Experiências</span>
-          <a
-            href="#next-section"
-            aria-label="Ir para a próxima sessão"
-            className="flex arrow-group  arrow-icon z-11"
-          >
-            <span className="arrow-circle">
-              <IoIosArrowDown className="arrow-icon" />
-            </span>
-          </a>
         </div>
       </header>
     );
