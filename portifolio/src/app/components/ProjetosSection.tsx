@@ -10,8 +10,6 @@ export default function ProjetosSection() {
     { id: 2, nome: "Projeto 2" },
     { id: 3, nome: "Projeto 3" },
     { id: 4, nome: "Projeto 4" },
-    { id: 5, nome: "Projeto 5" },
-    { id: 6, nome: "Projeto 6" },
   ];
 
   const localRef = useRef<HTMLDivElement>(null);

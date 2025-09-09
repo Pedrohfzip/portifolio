@@ -66,7 +66,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
           <div className="flex flex-col items-center space-y-2 text-white-700 z-11">
             <div className="flex flex-row items-center justify-center space-x-4">
               <motion.div
-                initial={{ x: 0, opacity: 1 }}
+                initial={{ y: 0, opacity: 1 }}
                 animate={isInView ? { x: [0, 4, -4, 4, 0], y: [0, -4, 0, 4, 0] } : { x: 0, y: 0 }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 style={{ display: "inline-block" }}

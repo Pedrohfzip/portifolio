@@ -57,7 +57,7 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
             <p className="text-gray-300 text-sm">Atendimento e suporte a usuários, manutenção de hardware e software.</p>
           </div>
         </motion.div>
-        <div className="flex flex-col items-center justify-center pt-6">
+        <div className="flex flex-col items-center justify-center pt-6 pb-6">
           <span className="mt-4 text-white">Projetos</span>
           <a
             href="#projeto"
