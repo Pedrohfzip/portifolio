@@ -32,14 +32,16 @@ export default function ProjetosSection() {
 
     return (
         <section ref={localRef} id="projeto" className="w-screen h-screen flex flex-col items-center justify-center bg-transparent py-4 md:py-10 snap-center overflow-y-auto z-11">
-            <MeshBackground />
+
             {/* Título centralizado só no mobile */}
             {!isDesktop && (
                 <div className="w-full flex justify-center items-center">
                     <span className="block text-sm text-white opacity-70 mb-2 text-center">Projetos</span>
                 </div>
             )}
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl px-4 z-10">
+
                 {projetos.map((projeto, idx) => (
                     <motion.div
                         key={projeto.id}

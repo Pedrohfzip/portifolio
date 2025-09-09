@@ -25,13 +25,13 @@ function useTypewriter(text: string, speed = 40) {
 }
 
 const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
-  function Header({  }, ref) {
+  function Header({ }, ref) {
     const dispatch = useDispatch();
     const text = "Tenho 23 anos e curto desenvolver soluções práticas e inovadoras, sempre pensando na qualidade e na experiência de quem usa. Estou em constante evolução, aprendendo e me adaptando às novas tecnologias.";
     const typedText = useTypewriter(text, 30);
     const [imgSize, setImgSize] = useState(400);
-    const localRef = useRef<HTMLDivElement>(null);
-    const isInView = useInView(localRef, { once: false, amount: 0.7 });
+    const inViewRef = useRef<HTMLDivElement>(null);
+    const isInView = useInView(inViewRef, { once: false, amount: 0.7 });
 
     // Atualiza o estado global do navbar quando a sessão está visível
     useEffect(() => {
@@ -62,12 +62,11 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
         id="header"
         style={{ paddingTop: '56px' }}
       >
-        <MeshBackground />
         {/* Título discreto só no mobile */}
-        <div ref={localRef} className="w-screen h-screen flex flex-col items-center justify-center relative z-9 ">
+        <motion.div ref={inViewRef} className="w-screen h-screen flex flex-col items-center justify-center relative z-9 ">
           <div className="flex flex-col items-center space-y-2 text-white-700 z-11">
             <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
-                      {!isDesktop && (
+              {!isDesktop && (
                 <div className="w-full flex justify-center">
                   <span className="block text-sm text-white opacity-70 mb-2 text-center">Sobre Mim</span>
                 </div>
@@ -90,7 +89,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
                   initial={{ x: 200, opacity: 0 }}
                   animate={isInView ? { x: 0, opacity: 1 } : { x: 200, opacity: 0 }}
                   transition={{ duration: 1 }}
-                  className="m-0 p-0 font-extrabold text-2xl"
+                  className="m-0 p-0 font-extrabold text-center text-2xl"
                   style={{ fontSize: "28px" }}
                   >
                     Olá, meu nome é Pedro!
@@ -99,7 +98,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
                     initial={{ x: -200, opacity: 0 }}
                     animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
                     transition={{ duration: 1 }}
-                    className="m-0 p-0 font-medium text-lg"
+                    className="m-0 p-0 font-medium text-center text-lg"
                     style={{ fontSize: "18px" }}
                   >
                     Sou desenvolvedor web.
@@ -114,7 +113,6 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
                 </motion.p>
               </motion.div>
             </div>
-
 
             <motion.div
               className="flex flex-row items-center justify-center space-x-4 pt-2 text-2xl"
@@ -163,7 +161,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
               </motion.a>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
       </header>
     );
   }

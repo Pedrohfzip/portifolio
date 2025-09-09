@@ -30,8 +30,14 @@ export default function Navbar() {
         </li>
         <li>
           <a
-            href="#contato"
-            className={activeSection === "contato" ? "text-white navbar-active" : "text-white"}
+            href="#skills"
+            className={activeSection === "skills" ? "text-white navbar-active" : "text-white"}
+          >Skills</a>
+        </li>
+        <li>
+          <a
+            href="#footer"
+            className={activeSection === "footer" ? "text-white navbar-active" : "text-white"}
           >Contato</a>
         </li>
       </ul>
@@ -56,6 +62,9 @@ export default function Navbar() {
             </li>
             <li className="w-full text-center py-2">
               <a href="#projeto" className={activeSection === "projeto" ? "text-white navbar-active" : "text-white"} onClick={() => setOpen(false)}>Projetos</a>
+            </li>
+            <li className="w-full text-center py-2">
+              <a href="#skills" className={activeSection === "skills" ? "text-white navbar-active" : "text-white"} onClick={() => setOpen(false)}>Skills</a>
             </li>
             <li className="w-full text-center py-2">
               <a href="#contato" className={activeSection === "contato" ? "text-white navbar-active" : "text-white"} onClick={() => setOpen(false)}>Contato</a>

@@ -9,13 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setActiveSection } from "./store/navbarSlice";
 import type { RootState } from "./store/store";
 import Footer from "./components/Footer";
-
+import SkillsSection from "./components/SkillsSection";
+import MeshBackground from "./threeJS/MeshBackground";
 // Definição das seções para o indicador vertical
 const sections = [
   { id: "header", label: "Home" },
   { id: "next-section", label: "Experiências" },
   { id: "projeto", label: "Projetos" },
-  { id: "contato", label: "Contato" },
+  { id: "skills", label: "Skills" },
+  { id: "footer", label: "footer" },
 ];
 
 
@@ -23,7 +25,8 @@ export default function Home() {
   const headerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const projetosRef = useRef<HTMLDivElement>(null);
-  const contatoRef = useRef<HTMLDivElement>(null);
+  const skillsRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const activeSection = useSelector((state: RootState) => state.navbar.activeSection);
   const [isDesktop, setIsDesktop] = useState(true);
@@ -32,8 +35,9 @@ export default function Home() {
     const header = headerRef.current;
     const section = sectionRef.current;
     const projetos = projetosRef.current;
-    const contato = contatoRef.current;
-    if (!header || !section || !projetos || !contato) return;
+    const skills = skillsRef.current;
+    const footer = footerRef.current;
+    if (!header || !section || !projetos || !skills || !footer) return;
     const observer = new window.IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
@@ -46,8 +50,11 @@ export default function Home() {
           if (entry.target === projetos && entry.isIntersecting) {
             dispatch(setActiveSection("projetos"));
           }
-          if (entry.target === contato && entry.isIntersecting) {
-            dispatch(setActiveSection("contato"));
+          if (entry.target === skills && entry.isIntersecting) {
+            dispatch(setActiveSection("skills"));
+          }
+          if (entry.target === footer && entry.isIntersecting) {
+            dispatch(setActiveSection("footer"));
           }
         });
       },
@@ -58,7 +65,9 @@ export default function Home() {
     );
     observer.observe(header);
     observer.observe(section);
-      console.log(activeSection);
+    observer.observe(projetos);
+    observer.observe(skills);
+    observer.observe(footer);
     return () => observer.disconnect();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
@@ -73,6 +82,8 @@ export default function Home() {
   }, []);
 
   return (
+    <>
+    <MeshBackground />
     <div
       className={`m-0 p-0 h-screen w-screen scroll-smooth ${isDesktop ? 'overflow-y-auto overflow-x-hidden scroll-smooth snap-y snap-mandatory' : ' overflow-y-auto overflow-x-hidden scroll-smooth snap-y '} `}
       style={{ position: "relative" }}
@@ -130,17 +141,9 @@ export default function Home() {
       <Header showAltParticles={activeSection} />
       <ExperienciasSection sectionRef={sectionRef} />
       <ProjetosSection />
-      {/* Sessão Contato */}
-      <section id="contato" className="w-screen h-screen max-h-screen flex flex-col items-center justify-center snap-center bg-transparent">
-        {/* Título responsivo igual às outras seções */}
-        {typeof window !== "undefined" && window.innerWidth < 768 && (
-          <div className="w-full flex justify-center items-center">
-            <span className="block text-sm text-white opacity-70 mb-2 text-center">Contato</span>
-          </div>
-        )}
-        <ContactForm />
-      </section>
+      <SkillsSection />
       <Footer />
     </div>
+    </>
   );
 }

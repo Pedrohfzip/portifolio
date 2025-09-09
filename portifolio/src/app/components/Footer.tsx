@@ -1,16 +1,80 @@
 "use client";
-import React from "react";
+import { useInView } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveSection } from "../store/navbarSlice";
+import { motion } from "framer-motion";
+import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
+import { SiWhatsapp } from "react-icons/si";
+import type { RootState } from "../store/store";
 
 export default function Footer() {
+  const localRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(localRef, { once: false, amount: 0.7 });
+  const dispatch = useDispatch();
+  const activeSection = useSelector((state: RootState) => state.navbar.activeSection);
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    if (isInView) {
+      dispatch(setActiveSection("footer"));
+    }
+  }, [isInView, dispatch]);
+
+  const animateLinks = activeSection === "footer" ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 };
+
   return (
-    <footer className="w-full py-6 bg-[#171717] flex flex-col items-center justify-center text-white opacity-80 text-sm mt-auto snap-end">
-      <div className="mb-2 text-center">
-        <span className="block">fagundeshpedro@gmail.com</span>
-        <span className="block">+55 (49) 998-251401</span>
-      </div>
-      <div className="text-center">
+    <footer
+      ref={localRef}
+      id="footer"
+      className="w-screen h-screen py-6 flex flex-col items-center justify-center text-white opacity-80 text-sm mt-auto snap-end"
+      style={{ scrollSnapAlign: "end" }}
+    >
+      <motion.div
+        className="flex flex-row gap-6 mb-4"
+        initial={{ opacity: 0, y: 40 }}
+        animate={animateLinks}
+        transition={{ duration: 0.8 }}
+      >
+        <a
+          href="https://www.linkedin.com/in/pedro-h-fagundes"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 hover:text-cyan-400 transition-colors"
+        >
+          <FaLinkedin size={22} /> LinkedIn
+        </a>
+        <a
+          href="https://github.com/Pedrohfzip"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 hover:text-cyan-400 transition-colors"
+        >
+          <FaGithub size={22} /> GitHub
+        </a>
+        <a
+          href="mailto:fagundeshpedro@gmail.com"
+          className="flex items-center gap-2 hover:text-cyan-400 transition-colors"
+        >
+          <FaEnvelope size={22} /> E-mail
+        </a>
+        <a
+          href="https://wa.me/5549998251401"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 hover:text-cyan-400 transition-colors"
+        >
+          <SiWhatsapp size={22} /> WhatsApp
+        </a>
+      </motion.div>
+      <motion.div
+        className="flex flex-row gap-6 mb-4"
+        initial={{ opacity: 0, y: 40 }}
+        animate={animateLinks}
+        transition={{ duration: 0.8 }}
+      >
         <span>Feito por Pedro Henrique Fagundes</span>
-      </div>
+      </motion.div>
     </footer>
   );
 }

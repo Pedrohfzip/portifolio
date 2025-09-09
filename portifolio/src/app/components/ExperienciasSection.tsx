@@ -32,7 +32,6 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
       id="next-section"
       className="w-screen h-screen max-h-screen flex flex-col items-center justify-center text-white snap-center relative"
     >
-      <MeshBackground />
       {/* Título centralizado só no mobile */}
       {!isDesktop && (
         <div className="w-full flex justify-center items-center">
