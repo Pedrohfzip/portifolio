@@ -26,9 +26,10 @@ export default function MeshBackground() {
     const mouse = { x: -1000, y: -1000 };
 
     function animate() {
+      if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
       // Atualiza pontos
-      for (let p of points) {
+      for (const p of points) {
         p.x += p.vx;
         p.y += p.vy;
         // Rebote nas bordas
@@ -63,7 +64,7 @@ export default function MeshBackground() {
         }
       }
       // Desenha pontos
-      for (let p of points) {
+      for (const p of points) {
         ctx.save();
         ctx.beginPath();
         ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
