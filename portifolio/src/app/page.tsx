@@ -3,7 +3,6 @@ import ExperienciasSection from "./components/ExperienciasSection";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import ProjetosSection from "./components/ProjetosSection";
-import ContactForm from "./components/ContactForm";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveSection } from "./store/navbarSlice";
@@ -69,7 +68,6 @@ export default function Home() {
     observer.observe(skills);
     observer.observe(footer);
     return () => observer.disconnect();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   useEffect(() => {

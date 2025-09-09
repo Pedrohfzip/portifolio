@@ -1,11 +1,18 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, JSX } from "react";
 import { motion, useInView } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setActiveSection } from "../store/navbarSlice";
 import { SiReact, SiNodedotjs, SiPostgresql, SiJavascript, SiTypescript, SiLinux, SiGithub, SiTailwindcss } from "react-icons/si";
 import MeshBackground from "../threeJS/MeshBackground";
-const skills = [
+
+type Skill = {
+  name: string;
+  icon: JSX.Element;
+  level: "Avançado" | "Intermediário" | "Básico";
+};
+
+const skills: Skill[] = [
   { name: "JavaScript", icon: <SiJavascript />, level: "Avançado" },
   { name: "React", icon: <SiReact />, level: "Avançado" },
   { name: "Node.js", icon: <SiNodedotjs />, level: "Avançado" },
@@ -16,8 +23,8 @@ const skills = [
   { name: "TailwindCSS", icon: <SiTailwindcss />, level: "Básico" },
 ];
 
-function chunkArray(arr: any[], size: number) {
-  const result = [];
+function chunkArray<T>(arr: T[], size: number): T[][] {
+  const result: T[][] = [];
   for (let i = 0; i < arr.length; i += size) {
     result.push(arr.slice(i, i + size));
   }
@@ -29,14 +36,6 @@ export default function SkillsSection() {
   const localRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(localRef, { once: false, amount: 0.7 });
   const dispatch = useDispatch();
-  const [isDesktop, setIsDesktop] = useState(true);
-
-  useEffect(() => {
-    setIsDesktop(window.innerWidth >= 768);
-    const handleResize = () => setIsDesktop(window.innerWidth >= 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     if (isInView) {
