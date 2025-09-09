@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { setActiveSection } from "../store/navbarSlice";
 import { useEffect, useRef, forwardRef, useState } from "react";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
-import { IoIosArrowDown } from "react-icons/io";
 
 function useTypewriter(text: string, speed = 40) {
   const [displayedText, setDisplayedText] = useState("");
@@ -26,7 +25,7 @@ function useTypewriter(text: string, speed = 40) {
 }
 
 const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
-  function Header({ showAltParticles }, ref) {
+  function Header({  }, ref) {
     const dispatch = useDispatch();
     const text = "Tenho 23 anos e curto desenvolver soluções práticas e inovadoras, sempre pensando na qualidade e na experiência de quem usa. Estou em constante evolução, aprendendo e me adaptando às novas tecnologias.";
     const typedText = useTypewriter(text, 30);

@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setActiveSection } from "./store/navbarSlice";
 import type { RootState } from "./store/store";
 import Footer from "./components/Footer";
-import MeshBackground from "./threeJS/MeshBackground";
 
 // Definição das seções para o indicador vertical
 const sections = [
@@ -102,7 +101,7 @@ export default function Home() {
             borderRadius: "8px",
           }}
         >
-          {sections.map((section, idx) => (
+          {sections.map((section) => (
             <button
               key={section.id}
               aria-label={section.label}
