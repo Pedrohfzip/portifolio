@@ -142,7 +142,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
                 <FaGithub />
               </motion.a>
               <motion.a
-                href="https://www.linkedin.com/in/pedrohenriquezip/"
+                href="https://www.linkedin.com/in/pedro-h-fagundes/"
                 target="_blank"
                 rel="noopener noreferrer"
                 title="LinkedIn"
