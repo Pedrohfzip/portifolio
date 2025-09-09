@@ -1,5 +1,5 @@
 "use client";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { RefObject, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useDispatch } from "react-redux";
@@ -20,8 +20,20 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
     <section
       ref={sectionRef}
       id="next-section"
-      className="w-screen h-screen h-100 flex items-center justify-center text-white snap-center relative"
+      className="w-screen h-screen max-h-screen flex flex-col items-center justify-center text-white snap-center relative"
     >
+      <div className="flex flex-col items-center justify-center pt-20 pb-10">
+        <span style={{color: "#3a3a3aff", fontWeight: "bold"}} className="text-white">Sobre</span>
+        <a
+          href="#header"
+          aria-label="Ir para a próxima sessão"
+          className="flex arrow-group arrow-icon z-11"
+        >
+          <span className="arrow-circle">
+            <IoIosArrowUp className="arrow-icon" />
+          </span>
+        </a>
+      </div>
       <div ref={localRef} className="relative flex flex-col justify-center align-center z-10 max-w-xl pl-4">
         {/* Linha vertical animada */}
         <motion.div
@@ -57,8 +69,8 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
             <p className="text-gray-300 text-sm">Atendimento e suporte a usuários, manutenção de hardware e software.</p>
           </div>
         </motion.div>
-        <div className="flex flex-col items-center justify-center pt-6 pb-2">
-          <span className="mt-4 text-white">Projetos</span>
+        <div className="flex flex-col items-center justify-center pt-6 pb-0">
+          <span style={{color: "#3a3a3aff", fontWeight: "bold"}} className="mt-4 text-white">Projetos</span>
           <a
             href="#projeto"
             aria-label="Ir para a próxima sessão"

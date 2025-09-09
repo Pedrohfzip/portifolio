@@ -54,7 +54,7 @@ export default function Home() {
 
   return (
     <div
-      className={`m-0 p-0 h-screen w-screen scroll-smooth ${isDesktop ? 'overflow-y-auto overflow-x-hidden scroll-smooth snap-y snap-mandatory' : 'overflow-y-auto overflow-x-hidden scroll-smooth snap-y snap-mandatory'} `}
+      className={`m-0 p-0 h-screen w-screen scroll-smooth ${isDesktop ? 'overflow-y-auto overflow-x-hidden scroll-smooth snap-y snap-mandatory' : ' overflow-y-auto overflow-x-hidden scroll-smooth snap-y snap-mandatory '} `}
     >
     <Navbar />
     <Header showAltParticles={activeSection} />

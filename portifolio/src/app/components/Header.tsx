@@ -57,7 +57,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
     return (
       <header
         ref={ref}
-        className="w-screen h-screen flex flex-col align-center snap-start"
+        className="w-screen h-screen max-h-screen flex flex-col align-center snap-center"
         id="header"
         style={{ paddingTop: '56px' }}
       >
@@ -77,7 +77,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
                   width={imgSize}
                   height={imgSize}
                   className="m-0 p-0 bg-transparent rounded-full object-contain z-20"
-                  style={{ minWidth: '400px'}}
+                  style={{ minWidth: '400px' }}
                 />
               </motion.div>
             </div>
@@ -150,7 +150,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
           </div>
         </div>
         <div className="flex flex-col items-center mt-[-4px] justify-center pb-6">
-          <span className="mt-4 text-white">Experiências</span>
+          <span style={{color: "#3a3a3aff", fontWeight: "bold"}} className="mt-4">Experiências</span>
           <a
             href="#next-section"
             aria-label="Ir para a próxima sessão"
