@@ -16,7 +16,7 @@ import LoadingScreen from "./components/LoadingScreen";
 const sections = [
   { id: "header", label: "Home" },
   { id: "next-section", label: "Experiências" },
-  // { id: "projeto", label: "Projetos" },
+  { id: "projeto", label: "Projetos" },
   { id: "skills", label: "Skills" },
   { id: "footer", label: "footer" },
 ];
@@ -154,7 +154,7 @@ export default function Home() {
         <Navbar />
         <Header showAltParticles={activeSection} />
         <ExperienciasSection sectionRef={sectionRef} />
-        {/* <ProjetosSection /> */}
+        <ProjetosSection />
         <SkillsSection />
         <Footer />
       </div>

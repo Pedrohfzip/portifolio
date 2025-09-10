@@ -61,9 +61,7 @@ export default function SkillsSection() {
                   <span className="mb-1 text-2xl opacity-80">{skill.icon}</span>
                   <span className="font-medium text-sm mb-1">{skill.name}</span>
                   <span className={`text-xs px-2 py-1 rounded opacity-80
-                    ${skill.level === "Avançado" ? "bg-green-700 dark:bg-green-600 text-white" :
-                      skill.level === "Intermediário" ? "bg-yellow-700 dark:bg-yellow-500 text-white" :
-                      "bg-gray-700 dark:bg-gray-400 text-white dark:text-black"}
+                    ${"bg-green-700 dark:bg-green-600 text-white"}
                   `}>{skill.level}</span>
                 </motion.div>
               ))}
