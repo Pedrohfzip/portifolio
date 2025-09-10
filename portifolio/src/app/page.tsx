@@ -10,6 +10,8 @@ import type { RootState } from "./store/store";
 import Footer from "./components/Footer";
 import SkillsSection from "./components/SkillsSection";
 import MeshBackground from "./threeJS/MeshBackground";
+import LoadingScreen from "./components/LoadingScreen";
+
 // Definição das seções para o indicador vertical
 const sections = [
   { id: "header", label: "Home" },
@@ -29,7 +31,13 @@ export default function Home() {
   const dispatch = useDispatch();
   const activeSection = useSelector((state: RootState) => state.navbar.activeSection);
   const [isDesktop, setIsDesktop] = useState(true);
+  const [loading, setLoading] = useState(true);
   
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2200);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     const header = headerRef.current;
     const section = sectionRef.current;
@@ -79,69 +87,71 @@ export default function Home() {
     return () => window.removeEventListener('resize', checkScreen);
   }, []);
 
+  if (loading) {
+    return <LoadingScreen />;
+  }
   return (
     <>
-    <MeshBackground />
-    <div
-      className={`m-0 p-0 h-screen w-screen scroll-smooth ${isDesktop ? 'overflow-y-auto overflow-x-hidden scroll-smooth snap-y snap-mandatory' : ' overflow-y-auto overflow-x-hidden scroll-smooth snap-y '} `}
-      style={{ position: "relative" }}
-    >
-
-      {/* Indicador vertical de seções - só aparece no desktop */}
-      {isDesktop && (
-        <nav
-          aria-label="Indicador de seções"
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: '5%',
-            transform: "translateY(-50%)",
-            height: "80%",
-            width: "0px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-around",
-            alignItems: "center",
-            zIndex: 50,
-            background: "rgba(99, 99, 99, 0.24)",
-            pointerEvents: "auto",
-            padding: "10px",
-            borderRadius: "8px",
-          }}
-        >
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              aria-label={section.label}
-              onClick={() => {
-                const el = document.getElementById(section.id);
-                if (el) {
-                  el.scrollIntoView({ behavior: "smooth", block: "center" });
-                }
-              }}
-              style={{
-                width: activeSection === section.id ? 30 : 14,
-                height: activeSection === section.id ? 30 : 14,
-                borderRadius: "50%",
-                background: activeSection === section.id ? "#abababff" : "rgba(234, 234, 234, 0.15)",
-                border: activeSection === section.id ? "2px solid #c9c9c9ff" : "1px solid #888",
-                transition: "all 0.2s",
-                margin: "0 0 0 0",
-                outline: "none",
-                boxShadow: activeSection === section.id ? "0 0 0 2px #fff2" : "none",
-                cursor: "pointer"
-              }}
-            />
-          ))}
-        </nav>
-      )}
-      <Navbar />
-      <Header showAltParticles={activeSection} />
-      <ExperienciasSection sectionRef={sectionRef} />
-      <ProjetosSection />
-      <SkillsSection />
-      <Footer />
-    </div>
+      <MeshBackground />
+      <div
+        className={`m-0 p-0 h-screen w-screen scroll-smooth ${isDesktop ? 'overflow-y-auto overflow-x-hidden scroll-smooth snap-y snap-mandatory' : ' overflow-y-auto overflow-x-hidden scroll-smooth snap-y '} `}
+        style={{ position: "relative" }}
+      >
+        {/* Indicador vertical de seções - só aparece no desktop */}
+        {isDesktop && (
+          <nav
+            aria-label="Indicador de seções"
+            style={{
+              position: "fixed",
+              top: "50%",
+              left: '5%',
+              transform: "translateY(-50%)",
+              height: "80%",
+              width: "0px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around",
+              alignItems: "center",
+              zIndex: 50,
+              background: "rgba(99, 99, 99, 0.24)",
+              pointerEvents: "auto",
+              padding: "10px",
+              borderRadius: "8px",
+            }}
+          >
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                aria-label={section.label}
+                onClick={() => {
+                  const el = document.getElementById(section.id);
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "center" });
+                  }
+                }}
+                style={{
+                  width: activeSection === section.id ? 30 : 14,
+                  height: activeSection === section.id ? 30 : 14,
+                  borderRadius: "50%",
+                  background: activeSection === section.id ? "#abababff" : "rgba(234, 234, 234, 0.15)",
+                  border: activeSection === section.id ? "2px solid #c9c9c9ff" : "1px solid #888",
+                  transition: "all 0.2s",
+                  margin: "0 0 0 0",
+                  outline: "none",
+                  boxShadow: activeSection === section.id ? "0 0 0 2px #fff2" : "none",
+                  cursor: "pointer"
+                }}
+              />
+            ))}
+          </nav>
+        )}
+        <Navbar />
+        <Header showAltParticles={activeSection} />
+        <ExperienciasSection sectionRef={sectionRef} />
+        <ProjetosSection />
+        <SkillsSection />
+        <Footer />
+      </div>
     </>
   );
 }
