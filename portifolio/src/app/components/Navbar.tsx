@@ -22,12 +22,12 @@ export default function Navbar() {
             className={activeSection === "next-section" ? "navbar-active text-[var(--foreground)] dark:text-[var(--foreground)]" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}
           >Experiências</a>
         </li>
-        <li>
+        {/* <li>
           <a
             href="#projeto"
             className={activeSection === "projeto" ? "navbar-active text-[var(--foreground)] dark:text-[var(--foreground)]" : "text-[var(--foreground)] dark:text-[var(--foreground)]"}
           >Projetos</a>
-        </li>
+        </li> */}
         <li>
           <a
             href="#skills"
