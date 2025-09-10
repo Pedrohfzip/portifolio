@@ -58,17 +58,17 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
     return (
       <header
         ref={ref}
-        className="w-screen h-screen max-h-screen flex flex-col align-center snap-center"
+        className="w-screen h-screen max-h-screen flex flex-col align-center snap-center bg-[var(--background)] text-[var(--foreground)] dark:bg-[var(--background)] dark:text-[var(--foreground)]"
         id="header"
         style={{ paddingTop: '56px' }}
       >
         {/* Título discreto só no mobile */}
         <motion.div ref={inViewRef} className="w-screen h-screen flex flex-col items-center justify-center relative z-9 ">
-          <div className="flex flex-col items-center space-y-2 text-white-700 z-11">
+          <div className="flex flex-col items-center space-y-2 z-11 text-[var(--foreground)] dark:text-[var(--foreground)]">
             <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
               {!isDesktop && (
                 <div className="w-full flex justify-center">
-                  <span className="block text-sm text-white opacity-70 mb-2 text-center">Sobre Mim</span>
+                  <span className="block text-sm mb-2 text-center text-[var(--foreground)] dark:text-[var(--foreground)] opacity-70">Sobre Mim</span>
                 </div>
               )}
               <motion.div
@@ -89,7 +89,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
                   initial={{ x: 200, opacity: 0 }}
                   animate={isInView ? { x: 0, opacity: 1 } : { x: 200, opacity: 0 }}
                   transition={{ duration: 1 }}
-                  className="m-0 p-0 font-extrabold text-center text-2xl"
+                  className="m-0 p-0 font-extrabold text-center text-2xl text-[var(--foreground)] dark:text-[var(--foreground)]"
                   style={{ fontSize: "28px" }}
                   >
                     Olá, meu nome é Pedro!
@@ -98,14 +98,14 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
                     initial={{ x: -200, opacity: 0 }}
                     animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
                     transition={{ duration: 1 }}
-                    className="m-0 p-0 font-medium text-center text-lg"
+                    className="m-0 p-0 font-medium text-center text-lg text-[var(--foreground)] dark:text-[var(--foreground)]"
                     style={{ fontSize: "18px" }}
                   >
                     Sou desenvolvedor web.
                 </motion.h5>
                 <motion.p
-                  className="relative text-center mt-1 mb-1 p-1 text-white-900 rounded-2xl shadow-lg max-w-xs"
-                  style={{ fontSize: "12px", minWidth: "100px", backgroundColor: "#171717ff" }}
+                  className="relative text-center mt-1 mb-1 p-1 rounded-2xl shadow-lg max-w-xs text-[var(--foreground)] dark:text-[var(--foreground)] bg-[var(--background)] dark:bg-[var(--background)]"
+                  style={{ fontSize: "12px", minWidth: "100px" }}
                   initial={{ opacity: 1, x: 0 }}
                   transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -130,7 +130,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
                 target="_blank"
                 rel="noopener noreferrer"
                 title="GitHub"
-                className="text-white hover:text-white"
+                className="text-[var(--foreground)] dark:text-[var(--foreground)] hover:text-blue-400"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6 }}
@@ -142,7 +142,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
                 target="_blank"
                 rel="noopener noreferrer"
                 title="LinkedIn"
-                className="text-white hover:text-white"
+                className="text-[var(--foreground)] dark:text-[var(--foreground)] hover:text-blue-400"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.25 }}
@@ -152,7 +152,7 @@ const Header = forwardRef<HTMLDivElement, { showAltParticles: string }>(
               <motion.a
                 href="mailto:pedrohenriquezip@gmail.com"
                 title="Email"
-                className="text-white hover:text-white"
+                className="text-[var(--foreground)] dark:text-[var(--foreground)] hover:text-blue-400"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.5 }}

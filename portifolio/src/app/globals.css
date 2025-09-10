@@ -53,9 +53,32 @@ html {
 }
 @import "tailwindcss";
 
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #171717;
+    --foreground: #ffffff;
+  }
+  body {
+    background: var(--background) !important;
+    color: var(--foreground) !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+  }
+  body {
+    background: var(--background) !important;
+    color: var(--foreground) !important;
+  }
 }
 
 /* @theme inline {

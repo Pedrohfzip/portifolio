@@ -30,19 +30,19 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
     <section
       ref={sectionRef}
       id="next-section"
-      className="w-screen h-screen max-h-screen flex flex-col items-center justify-center text-white snap-center relative"
+      className="w-screen h-screen max-h-screen flex flex-col items-center justify-center snap-center relative bg-[var(--background)] text-[var(--foreground)] dark:bg-[var(--background)] dark:text-[var(--foreground)]"
     >
       {/* Título centralizado só no mobile */}
       {!isDesktop && (
         <div className="w-full flex justify-center items-center">
-          <span className="block text-sm text-white opacity-70 mb-2 text-center">Experiências</span>
+          <span className="block text-sm mb-2 text-center text-[var(--foreground)] dark:text-[var(--foreground)] opacity-70">Experiências</span>
         </div>
       )}
-      <div ref={localRef} className="relative flex flex-col justify-center align-center z-10 max-w-xl pl-4">
+  <div ref={localRef} className="relative flex flex-col justify-center align-center z-10 max-w-xl pl-4 text-[var(--foreground)] dark:text-[var(--foreground)]">
         {/* Linha vertical animada */}
         <motion.div
-          className="absolute left-0 top-0 w-1"
-          style={{ background: "#111311", height: "80%" }}
+          className="absolute left-0 top-0 w-1 bg-gray-300 dark:bg-gray-700"
+          style={{ height: "80%" }}
           initial={{ scaleY: 0, originY: 1 }}
           animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
@@ -57,14 +57,14 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
           <div className="ml-0">
             <h3 className={`font-bold ${isDesktop ? 'text-xl' : 'text-lg'} flex items-center gap-2`}>
               Desenvolvedor Full Stack trainee
-              <span className="flex gap-1 text-base text-cyan-300 opacity-80">
+              <span className="flex gap-1 text-base text-cyan-600 dark:text-cyan-300 opacity-80">
                 <SiReact />
                 <SiNodedotjs />
                 <SiPostgresql />
               </span>
             </h3>
-            <p className="text-sm text-gray-200">NDM Advogados, 2024 - 2025</p>
-            <p className="text-gray-300 text-sm">
+            <p className="text-sm text-gray-700 dark:text-gray-200">NDM Advogados, 2024 - 2025</p>
+            <p className="text-gray-800 dark:text-gray-300 text-sm">
               Desenvolvimento de aplicações web com React, Node.js e PostgreSQL.<br/>
               APIs REST, autenticação JWT, integração de sistemas e deploy automatizado.<br/>
               Suporte técnico e treinamento de usuários.
@@ -81,13 +81,13 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
           <div className="ml-0">
             <h3 className={`font-bold ${isDesktop ? 'text-xl' : 'text-lg'} flex items-center gap-2`}>
               Suporte Técnico em TI
-              <span className="flex gap-1 text-base text-gray-300 opacity-70">
+              <span className="flex gap-1 text-base text-blue-600 dark:text-blue-300 opacity-70">
                 <FaWindows />
                 <SiLinux />
               </span>
             </h3>
-            <p className="text-sm text-gray-200">Trombini Embalagens, 2022 - 2023</p>
-            <p className="text-gray-300 text-sm">
+            <p className="text-sm text-gray-700 dark:text-gray-200">Trombini Embalagens, 2022 - 2023</p>
+            <p className="text-gray-800 dark:text-gray-300 text-sm">
               Atendimento a usuários, manutenção de hardware/software e configuração de sistemas.<br/>
               Treinamento, implantação de ferramentas e relatórios de TI.
             </p>

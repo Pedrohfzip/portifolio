@@ -113,10 +113,12 @@ export default function Home() {
               justifyContent: "space-around",
               alignItems: "center",
               zIndex: 50,
-              background: "rgba(99, 99, 99, 0.24)",
+              background: "var(--background)",
               pointerEvents: "auto",
               padding: "10px",
               borderRadius: "8px",
+              // border: "1px solid var(--foreground)",
+              boxShadow: "0 2px 12px 0 rgba(0,0,0,0.08)",
             }}
           >
             {sections.map((section) => (
@@ -133,12 +135,16 @@ export default function Home() {
                   width: activeSection === section.id ? 30 : 14,
                   height: activeSection === section.id ? 30 : 14,
                   borderRadius: "50%",
-                  background: activeSection === section.id ? "#abababff" : "rgba(234, 234, 234, 0.15)",
-                  border: activeSection === section.id ? "2px solid #c9c9c9ff" : "1px solid #888",
+                  background: activeSection === section.id
+                    ? "var(--foreground)"
+                    : "rgba(234, 234, 234, 0.15)",
+                  border: activeSection === section.id
+                    ? "2px solid var(--foreground)"
+                    : "1px solid var(--foreground)",
                   transition: "all 0.2s",
                   margin: "0 0 0 0",
                   outline: "none",
-                  boxShadow: activeSection === section.id ? "0 0 0 2px #fff2" : "none",
+                  boxShadow: activeSection === section.id ? "0 0 0 2px var(--foreground)" : "none",
                   cursor: "pointer"
                 }}
               />

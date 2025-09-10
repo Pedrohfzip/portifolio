@@ -27,7 +27,7 @@ export default function Footer() {
     <footer
       ref={localRef}
       id="footer"
-      className="w-screen h-screen py-6 flex flex-col items-center justify-center text-white opacity-80 text-sm mt-auto snap-end"
+      className="w-screen h-screen py-6 flex flex-col items-center justify-center opacity-80 text-sm mt-auto snap-end bg-[var(--background)] text-[var(--foreground)] dark:bg-[var(--background)] dark:text-[var(--foreground)]"
       style={{ scrollSnapAlign: "end" }}
     >
       <motion.div
@@ -40,7 +40,7 @@ export default function Footer() {
           href="https://www.linkedin.com/in/pedro-h-fagundes"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 hover:text-cyan-400 transition-colors"
+          className="flex items-center gap-2 hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors text-[var(--foreground)] dark:text-[var(--foreground)]"
         >
           <FaLinkedin size={22} /> LinkedIn
         </a>
@@ -48,13 +48,13 @@ export default function Footer() {
           href="https://github.com/Pedrohfzip"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 hover:text-cyan-400 transition-colors"
+          className="flex items-center gap-2 hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors text-[var(--foreground)] dark:text-[var(--foreground)]"
         >
           <FaGithub size={22} /> GitHub
         </a>
         <a
           href="mailto:fagundeshpedro@gmail.com"
-          className="flex items-center gap-2 hover:text-cyan-400 transition-colors"
+          className="flex items-center gap-2 hover:text-cyan-600 dark:hover:text-cyan-300 transition-colors text-[var(--foreground)] dark:text-[var(--foreground)]"
         >
           <FaEnvelope size={22} /> E-mail
         </a>
@@ -62,13 +62,13 @@ export default function Footer() {
           href="https://wa.me/5549998251401"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 hover:text-cyan-400 transition-colors"
+          className="flex items-center gap-2 hover:text-green-600 dark:hover:text-green-400 transition-colors text-[var(--foreground)] dark:text-[var(--foreground)]"
         >
           <SiWhatsapp size={22} /> WhatsApp
         </a>
       </motion.div>
       <motion.div
-        className="flex flex-row gap-6 mb-4"
+        className="flex flex-row gap-6 mb-4 text-[var(--foreground)] dark:text-[var(--foreground)]"
         initial={{ opacity: 0, y: 40 }}
         animate={animateLinks}
         transition={{ duration: 0.8 }}
