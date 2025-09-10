@@ -25,7 +25,7 @@ export default function RootLayout({
         <title>Pedro Henrique Fagundes</title>
         <meta name="description" content="Portfólio profissional de Pedro Henrique Fagundes - Desenvolvedor Web." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/perfil.png" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

@@ -3,7 +3,7 @@ import { useRef, useEffect, JSX } from "react";
 import { motion, useInView } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setActiveSection } from "../store/navbarSlice";
-import { SiReact, SiNodedotjs, SiPostgresql, SiJavascript, SiTypescript, SiLinux, SiGithub, SiTailwindcss } from "react-icons/si";
+import { SiReact, SiNodedotjs, SiPostgresql, SiJavascript, SiTypescript,SiNextdotjs, SiLinux, SiGithub, SiTailwindcss } from "react-icons/si";
 import MeshBackground from "../threeJS/MeshBackground";
 
 type Skill = {
@@ -14,13 +14,12 @@ type Skill = {
 
 const skills: Skill[] = [
   { name: "JavaScript", icon: <SiJavascript />, level: "Avançado" },
-  { name: "React", icon: <SiReact />, level: "Avançado" },
-  { name: "Node.js", icon: <SiNodedotjs />, level: "Avançado" },
-  { name: "PostgreSQL", icon: <SiPostgresql />, level: "Avançado" },
   { name: "TypeScript", icon: <SiTypescript />, level: "Avançado" },
-  { name: "Linux", icon: <SiLinux />, level: "Intermediário" },
-  { name: "GitHub", icon: <SiGithub />, level: "Intermediário" },
-  { name: "TailwindCSS", icon: <SiTailwindcss />, level: "Básico" },
+  { name: "Node.js", icon: <SiNodedotjs />, level: "Avançado" },
+  { name: "React", icon: <SiReact />, level: "Avançado" },
+  { name: "Next.JS", icon: <SiNextdotjs />, level: "Avançado" },
+  { name: "TailwindCSS", icon: <SiTailwindcss />, level: "Intermediário" },
+  { name: "PostgreSQL", icon: <SiPostgresql />, level: "Avançado" },
 ];
 
 function chunkArray<T>(arr: T[], size: number): T[][] {
