@@ -3,7 +3,6 @@ import { useRef, useEffect, useState } from "react";
 import { useInView, motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setActiveSection } from "../store/navbarSlice";
-import MeshBackground from "../threeJS/MeshBackground";
 
 export default function ProjetosSection() {
     const projetos = [
