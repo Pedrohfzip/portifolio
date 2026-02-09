@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { setActiveSection } from "../store/navbarSlice";
 import MeshBackground from "../threeJS/MeshBackground";
 import { SiReact, SiNodedotjs, SiPostgresql, SiLinux } from "react-icons/si";
+import { SiJavascript, SiHtml5, SiCss3 } from "react-icons/si";
 import { FaWindows } from "react-icons/fa";
 
 export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement | null> }) {
@@ -47,12 +48,42 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
           animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         />
-        {/* Experiência 1 */}
+        {/* Experiência 1 - Analista de TI / Desenvolvedor */}
         <motion.div
           className="flex items-center mb-20"
           initial={{ x: 100, opacity: 0 }}
           animate={isInView ? { x: 0, opacity: 1 } : { x: 100, opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <div className="ml-0">
+            <h3 className={`font-bold ${isDesktop ? 'text-xl' : 'text-lg'} flex items-center gap-2`}>
+              Analista de TI / Desenvolvedor
+              <span className="flex gap-1 text-base text-green-600 dark:text-green-300 opacity-80">
+                <FaWindows />
+                <SiLinux />
+                <SiJavascript className="text-yellow-500" />
+                <SiHtml5 className="text-orange-500" />
+                <SiCss3 className="text-blue-500" />
+                <SiPostgresql className="text-cyan-700 dark:text-cyan-300" />
+              </span>
+            </h3>
+            <p className="text-sm text-gray-700 dark:text-gray-200">Empresa Atual, 2025 - presente</p>
+            <p className="text-gray-800 dark:text-gray-300 text-sm text-justify">
+              - Suporte técnico na infraestrutura e dispositivos da empresa.<br/>
+              - Manutenção de rede, gerenciamento de servidores e atualização de software.<br/>
+              - Gerenciamento de licenças e segurança de sistemas.<br/>
+              - Desenvolvimento de aplicativos para automação de processos administrativos e de produção.<br/>
+              - Atuação estratégica para otimizar recursos, garantir disponibilidade e inovação tecnológica.<br/>
+              - Responsável por projetos de automação, integração de sistemas e melhoria contínua.
+            </p>
+          </div>
+        </motion.div>
+        {/* Experiência 2 - Desenvolvedor Full Stack trainee */}
+        <motion.div
+          className="flex items-center mb-20"
+          initial={{ x: 100, opacity: 0 }}
+          animate={isInView ? { x: 0, opacity: 1 } : { x: 100, opacity: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
         >
           <div className="ml-0">
             <h3 className={`font-bold ${isDesktop ? 'text-xl' : 'text-lg'} flex items-center gap-2`}>
@@ -64,13 +95,17 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
               </span>
             </h3>
             <p className="text-sm text-gray-700 dark:text-gray-200">NDM Advogados, 2024 - 2025</p>
-            <p className="text-gray-800 dark:text-gray-300 text-sm">
-              Desenvolvimento de aplicações web com React, Node.js e PostgreSQL.<br/>
-              APIs REST, autenticação JWT, integração de sistemas e deploy automatizado.<br/>
-              Suporte técnico e treinamento de usuários.
+            <p className="text-gray-800 dark:text-gray-300 text-sm text-justify">
+              - Desenvolvimento de aplicações web completas com React, Node.js e PostgreSQL, atuando desde o frontend até o backend.<br/>
+              - Criação de APIs REST robustas, autenticação JWT, integração de sistemas, automação de deploy e versionamento com Git.<br/>
+              - Implementação de testes automatizados, otimização de performance, arquitetura escalável e segurança de dados.<br/>
+              - Participação ativa em reuniões de definição de requisitos, colaboração com equipes multidisciplinares e resolução de problemas complexos.<br/>
+              - Suporte técnico, treinamento de usuários e documentação técnica detalhada.<br/>
+              - Vaga de grande importância, responsável por garantir a qualidade, eficiência e inovação nos projetos da empresa.
             </p>
           </div>
         </motion.div>
+
         {/* Experiência 2 */}
         <motion.div
           className="flex items-center mb-20"
@@ -84,12 +119,17 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
               <span className="flex gap-1 text-base text-blue-600 dark:text-blue-300 opacity-70">
                 <FaWindows />
                 <SiLinux />
+                <SiJavascript className="text-yellow-500" />
+                <SiHtml5 className="text-orange-500" />
+                <SiCss3 className="text-blue-500" />
+                <SiPostgresql className="text-cyan-700 dark:text-cyan-300" />
               </span>
             </h3>
             <p className="text-sm text-gray-700 dark:text-gray-200">Trombini Embalagens, 2022 - 2023</p>
-            <p className="text-gray-800 dark:text-gray-300 text-sm">
-              Atendimento a usuários, manutenção de hardware/software e configuração de sistemas.<br/>
-              Treinamento, implantação de ferramentas e relatórios de TI.
+            <p className="text-gray-800 dark:text-gray-300 text-sm text-justify">
+              - Atendimento a usuários, manutenção de hardware/software e configuração de sistemas.<br/>
+              - Treinamento, implantação de ferramentas e relatórios de TI.<br/>
+              - Desenvolvimento de sistema de gerenciamento de acessos e licenças utilizando JavaScript, HTML, CSS, PostgreSQL e Windows Server.
             </p>
           </div>
         </motion.div>

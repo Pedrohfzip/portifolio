@@ -32,11 +32,6 @@ export default function ProjetosSection() {
 
     return (
         <section ref={localRef} id="projeto" className="w-screen h-screen flex flex-col items-center justify-center py-4 md:py-10 snap-center overflow-y-auto z-11 relative bg-[var(--background)] text-[var(--foreground)] dark:bg-[var(--background)] dark:text-[var(--foreground)]">
-            {/* Overlay de reforma/construção */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center z-30 pointer-events-none bg-[var(--background)]/80 dark:bg-[var(--background)]/80">
-                <span className="text-3xl md:text-4xl font-bold text-yellow-400 mb-2 animate-pulse">🚧 Em construção 🚧</span>
-                <span className="text-lg md:text-xl text-[var(--foreground)] dark:text-[var(--foreground)] opacity-90">Esta seção está em reforma.<br/>Em breve novos projetos!</span>
-            </div>
 
             {/* Título centralizado só no mobile */}
             {!isDesktop && (
@@ -54,8 +49,10 @@ export default function ProjetosSection() {
                         animate={isInView ? { x: 0, opacity: 1 } : { x: 50, opacity: 0 }}
                         transition={{ duration: 0.9, ease: "easeOut", delay: idx * 0.15 }}
                     >
-                        <span className="text-xl font-semibold text-white mb-2">{projeto.nome}</span>
-                        <span className="text-gray-600 dark:text-gray-400">Em breve...</span>
+                        <a href={`/projetos/${projeto.id}`} className="w-full h-full flex flex-col items-center justify-center no-underline">
+                            <span className="text-xl font-semibold text-white mb-2">{projeto.nome}</span>
+                            <span className="text-gray-600 dark:text-gray-400">Ver detalhes do projeto</span>
+                        </a>
                     </motion.div>
                 ))}
             </div>
