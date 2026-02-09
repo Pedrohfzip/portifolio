@@ -3,7 +3,6 @@ import { RefObject, useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setActiveSection } from "../store/navbarSlice";
-import MeshBackground from "../threeJS/MeshBackground";
 import { SiReact, SiNodedotjs, SiPostgresql, SiLinux } from "react-icons/si";
 import { SiJavascript, SiHtml5, SiCss3 } from "react-icons/si";
 import { FaWindows } from "react-icons/fa";
