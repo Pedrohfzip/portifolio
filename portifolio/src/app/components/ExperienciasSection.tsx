@@ -102,16 +102,16 @@ export default function ExperienciasSection({ sectionRef }: { sectionRef: RefObj
     >
       <h3 className={`font-bold ${isDesktop ? 'text-xl' : 'text-lg'} flex items-center gap-2`}>
           Suporte Técnico em TI
-        <span className="flex gap-1 text-base text-blue-600 dark:text-blue-300 opacity-70">
+      </h3>
+      <p className="text-sm text-gray-700 dark:text-gray-200 mb-2">Trombini Embalagens, 2022 - 2023</p>
+      <span className="flex gap-1 text-base text-blue-600 dark:text-blue-300 opacity-70 mb-5">
           <FaWindows />
           <SiLinux />
           <SiJavascript className="text-yellow-500" />
           <SiHtml5 className="text-orange-500" />
           <SiCss3 className="text-blue-500" />
           <SiPostgresql className="text-cyan-700 dark:text-cyan-300" />
-        </span>
-      </h3>
-      <p className="text-sm text-gray-700 dark:text-gray-200 mb-2">Trombini Embalagens, 2022 - 2023</p>
+      </span>
       <p className="text-gray-800 dark:text-gray-300 text-sm text-justify">
         - Atendimento a usuários, manutenção de hardware/software e configuração de sistemas.<br/><br/>
         - Treinamento, implantação de ferramentas e relatórios de TI.<br/><br/>
