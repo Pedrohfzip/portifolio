@@ -6,9 +6,7 @@ import { setActiveSection } from "../store/navbarSlice";
 
 export default function ProjetosSection() {
     const projetos = [
-        { id: 1, nome: "Projeto 1" },
-        { id: 2, nome: "Projeto 2" },
-        { id: 3, nome: "Projeto 3" },
+        { id: 1, nome: "Car Store" },
     ];
 
     const localRef = useRef<HTMLDivElement>(null);
@@ -48,7 +46,7 @@ export default function ProjetosSection() {
                         animate={isInView ? { x: 0, opacity: 1 } : { x: 50, opacity: 0 }}
                         transition={{ duration: 0.9, ease: "easeOut", delay: idx * 0.15 }}
                     >
-                        <a href={`/projetos/${projeto.id}`} className="w-full h-full flex flex-col items-center justify-center no-underline">
+                        <a href={`/components/${projeto.id}`} className="w-full h-full flex flex-col items-center justify-center no-underline">
                             <span className="text-xl font-semibold text-white mb-2">{projeto.nome}</span>
                             <span className="text-gray-600 dark:text-gray-400">Ver detalhes do projeto</span>
                         </a>

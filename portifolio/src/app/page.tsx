@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import SkillsSection from "./components/SkillsSection";
 import MeshBackground from "./threeJS/MeshBackground";
 import LoadingScreen from "./components/LoadingScreen";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // Definição das seções para o indicador vertical
 const sections = [
@@ -20,6 +21,7 @@ const sections = [
   { id: "skills", label: "Skills" },
   { id: "footer", label: "footer" },
 ];
+
 
 
 export default function Home() {
@@ -32,11 +34,28 @@ export default function Home() {
   const activeSection = useSelector((state: RootState) => state.navbar.activeSection);
   const [isDesktop, setIsDesktop] = useState(true);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const searchParams = useSearchParams();
   
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2200);
     return () => clearTimeout(timer);
   }, []);
+
+  // Scroll suave para a seção de projetos se vier de /?scrollTo=projeto
+  useEffect(() => {
+    if (!loading) {
+      const scrollTo = searchParams?.get('scrollTo');
+      if (scrollTo) {
+        const el = document.getElementById(scrollTo);
+        if (el) {
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: "smooth", block: "center" });
+          }, 100); // pequeno delay para garantir que a Home está pronta
+        }
+      }
+    }
+  }, [loading, searchParams]);
 
   useEffect(() => {
     const header = headerRef.current;

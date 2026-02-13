@@ -25,7 +25,17 @@ export default function Projeto1Page() {
             O deploy é automatizado, garantindo agilidade nas atualizações. A autenticação é feita via JWT, proporcionando segurança e controle de acesso.
           </p>
         </div>
-        <Link href="/projetos" className="inline-block mt-4 text-blue-600 dark:text-blue-300 hover:underline">Voltar para projetos</Link>
+        <button
+          className="inline-block mt-4 text-blue-600 dark:text-blue-300 hover:underline"
+          onClick={() => {
+            // Navega para a Home e, após o carregamento, faz scroll até a seção de projetos
+            if (typeof window !== 'undefined') {
+              window.location.href = '/?scrollTo=projeto';
+            }
+          }}
+        >
+          Voltar para projetos
+        </button>
       </div>
     </section>
   );
