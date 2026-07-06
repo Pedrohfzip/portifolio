@@ -295,11 +295,11 @@ function About() {
             className="text-3xl md:text-4xl font-bold text-foreground leading-tight"
             style={{ fontFamily: DISPLAY }}
           >
-            Desenvolvedor com
+            Da infraestrutura
             <br />
-            mentalidade de
+            ao
             <br />
-            <span className="text-primary">engenheiro</span>
+            <span className="text-primary">software</span>
           </motion.h2>
         </div>
         <motion.div variants={fadeUp} className="space-y-4">
