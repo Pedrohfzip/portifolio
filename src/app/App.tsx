@@ -295,9 +295,7 @@ function About() {
             className="text-3xl md:text-4xl font-bold text-foreground leading-tight"
             style={{ fontFamily: DISPLAY }}
           >
-            Da infraestrutura
-            <br />
-            ao
+            Da infraestrutura ao
             <br />
             <span className="text-primary">software</span>
           </motion.h2>
